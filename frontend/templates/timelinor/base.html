@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>{% block title %}Timelinor | Timeline Creator{% endblock title %}</title>
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% include 'partials/_head.html' %}
+
+</head>
+
+<body>
+
+    <main class="page-wrapper">
+
+        <!-- Navbar -->
+        {% include 'partials/_nav_top.html' %}
+
+        <!-- Page content-->
+        {% block content %}{% endblock content %}
+
+    </main>
+
+    <!-- Footer-->
+    {% include 'partials/_footer.html' %}
+
+    <!-- Back to top button-->
+    <a class="btn-scroll-top" href="#top" data-scroll data-fixed-element>
+        <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
+        <i class="btn-scroll-top-icon ai-arrow-up"> </i>
+    </a>
+
+    <!-- Scripts -->
+    {% include 'partials/_scripts.html' %}
+
+</body>
+
+</html>
