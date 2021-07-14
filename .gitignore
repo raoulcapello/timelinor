@@ -1,0 +1,41 @@
+### Local secret keys
+.env
+
+### Python template
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Django stuff:
+staticfiles/
+static_root/
+media_root/
+
+# SQLite
+db.sqlite3
+
+# JSON
+*.json
+
+### VisualStudioCode template
+.vscode/*
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
+# !.vscode/extensions.json
+
+# VIM
+.vim/.bash_history
+.vim/.bash_logout
+.vim/.config/htop/htoprc
+.vim/.influx_history
+.vim/.python_history
+.vim/.viminfo
+.vim/.zcompdump
+.vim/.cache/
+.vim/.netrwhist
+
+### macOS template
+# General
+*.DS_Store
+
+
