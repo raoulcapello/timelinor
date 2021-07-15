@@ -3,7 +3,7 @@ A first static mockup version of the Timelinow web app.
 
 # Deployment
 
-Set the following environment variables:
+Required environment variables:
 * SECRET_KEY
 * DEBUG
 * APP_ENV ('dev', 'staging', or 'production')
@@ -14,9 +14,19 @@ Set the following environment variables:
     `mkvirtualenv timelinor` 
 
 * Set environment variables via `postactivate` file
+* Install required packages with:
+
+    `pip install -r requirements/local.txt`
 
 ## Staging via Heroku
 
+Required files for Heroku:
+* `Procfile`
+* `requirements.txt` (the one in the project root folder)
+
+Also note certain (clearly commented) settings in `settings.py`.
+
+Deploy as follows:
 * Create Heroku app
 * Push repo to Heroku
 * Set environment variables in Heroku app settings

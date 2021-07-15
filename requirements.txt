@@ -1,2 +1,6 @@
-# This file is only needed for Heroku deployments
 -r requirements/staging.txt
+
+# For Heroku deployments only
+django-heroku 
+whitenoise
+
