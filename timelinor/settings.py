@@ -34,7 +34,12 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(strtobool(os.getenv('DEBUG', 'False')))
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+if os.getenv('APP_ENV') == 'dev':
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+elif os.getenv('APP_ENV') == 'staging':
+    ALLOWED_HOSTS = ['timelinor.herokuapp.com']
+else:
+    ALLOWED_HOSTS = []
 
 
 # Application definition
