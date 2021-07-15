@@ -11,13 +11,15 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
-from distutils.util import strtobool
 from pathlib import Path
 
-# For Heroku deployments
-if os.getenv('APP_ENV') != 'dev':
-    import django_heroku
-    import dj_database_url
+import environ
+
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,15 +30,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+
+# Raises django's ImproperlyConfigured exception if SECRET_KEY not in
+# os.environ
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(strtobool(os.getenv('DEBUG', 'False')))
 
-if os.getenv('APP_ENV') == 'dev':
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-else:
-    ALLOWED_HOSTS = [os.getenv('ALLOWED_HOST')]
+# False if not in os.environ
+DEBUG = env('DEBUG')
+
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 
 # Application definition
@@ -92,25 +96,18 @@ WSGI_APPLICATION = 'timelinor.wsgi.application'
 
 DATABASES = {}
 
-if os.getenv('APP_ENV') == 'dev':
-    # Local postgres config
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('PG_NAME'),
-            'USER': os.getenv('PG_USER'),
-            'PASSWORD': os.getenv('PG_PASSWORD'),
-            'HOST': '127.0.0.1',
-            'PORT': 5432,
-        }
+# Local Postgres config
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('PG_NAME'),
+        'USER': os.getenv('PG_USER'),
+        'PASSWORD': os.getenv('PG_PASSWORD'),
+        'HOST': '127.0.0.1',
+        'PORT': 5432,
     }
-else:
-    # Heroku postgres config
-    DATABASES['default'] = dj_database_url.config(
-        os.getenv('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True,
-    )
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -156,11 +153,6 @@ MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'media'))
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-# For Heroku deployments
-if os.getenv('APP_ENV') != 'dev':
-    # Activate Django-Heroku.
-    django_heroku.settings(locals())
 
 # Logging
 # Set the environment variable to DEBUG, INFO, WARNING, CRITICAL or ERROR

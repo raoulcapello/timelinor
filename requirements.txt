@@ -1,6 +1,6 @@
+# Heroku needs this a file, which only function is to
+# point at the actual file:
 -r requirements/staging.txt
 
-# For Heroku deployments only
-django-heroku 
-whitenoise
+
 

@@ -2,3 +2,6 @@
 
 gunicorn==20.1.0 # WSGI API
 
+# For Heroku deployments only
+django-heroku 
+whitenoise
