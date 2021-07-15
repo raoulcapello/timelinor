@@ -148,6 +148,7 @@ if os.getenv('APP_ENV') == 'staging':
 # Logging
 # Set the environment variable to DEBUG, INFO, WARNING, CRITICAL or ERROR
 # Leave empty to leave logging disabled
+
 if os.getenv('LOGGING'):
     LOGGING = {
         'version': 1,
