@@ -14,13 +14,6 @@ import os
 from distutils.util import strtobool
 from pathlib import Path
 
-# For Heroku deployments
-if os.getenv('APP_ENV') == 'staging':
-    import django_heroku
-
-    # Activate Django-Heroku.
-    django_heroku.settings(locals())
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -132,3 +125,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'static_root'))
+
+# For Heroku deployments
+if os.getenv('APP_ENV') == 'staging':
+    import django_heroku
+
+    # Activate Django-Heroku.
+    django_heroku.settings(locals())
