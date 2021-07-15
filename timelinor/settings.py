@@ -15,7 +15,7 @@ from distutils.util import strtobool
 from pathlib import Path
 
 # For Heroku deployments
-if os.getenv('APP_ENV') == 'staging':
+if os.getenv('APP_ENV') != 'dev':
     import django_heroku
     import dj_database_url
 
