@@ -102,7 +102,7 @@ DATABASES = {}
 if os.getenv('APP_ENV') == 'staging':
     # Heroku postgres config
     DATABASES['default'] = dj_database_url.config(
-        'postgres://fvbuzfsazmgmem:9cd6a0e4369ace12958ce573e20954a225b8fe00a71d4b09c4c8bce2f2b1593a@ec2-54-220-195-236.eu-west-1.compute.amazonaws.com:5432/devoto7thru5t9',
+        os.getenv('DATABASE_URL'),
         conn_max_age=600,
         ssl_require=True,
     )
