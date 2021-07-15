@@ -55,8 +55,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     # Simplified static file serving.
     # https://warehouse.python.org/project/whitenoise/
+    'django.middleware.security.SecurityMiddleware',  # Security first
     'whitenoise.middleware.WhiteNoiseMiddleware',  # For Heroku deployments
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -65,11 +65,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-# For Heroku deployments
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'timelinor.urls'
 
@@ -97,14 +92,7 @@ WSGI_APPLICATION = 'timelinor.wsgi.application'
 
 DATABASES = {}
 
-if os.getenv('APP_ENV') == 'staging':
-    # Heroku postgres config
-    DATABASES['default'] = dj_database_url.config(
-        os.getenv('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True,
-    )
-else:
+if os.getenv('APP_ENV') == 'dev':
     # Local postgres config
     DATABASES = {
         'default': {
@@ -116,7 +104,13 @@ else:
             'PORT': 5432,
         }
     }
-
+else:
+    # Heroku postgres config
+    DATABASES['default'] = dj_database_url.config(
+        os.getenv('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True,
+    )
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -155,6 +149,13 @@ STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'static_root'))
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'media'))
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+# For Heroku deployments
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # For Heroku deployments
 if os.getenv('APP_ENV') == 'staging':
