@@ -35,7 +35,7 @@ DEBUG = bool(strtobool(os.getenv('DEBUG', 'False')))
 if os.getenv('APP_ENV') == 'dev':
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 elif os.getenv('APP_ENV') == 'staging':
-    ALLOWED_HOSTS = ['timelinor.herokuapp.com']
+    ALLOWED_HOSTS = ['*', 'timelinor.herokuapp.com']
 else:
     ALLOWED_HOSTS = []
 
