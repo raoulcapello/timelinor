@@ -144,3 +144,24 @@ STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'static_root'))
 if os.getenv('APP_ENV') == 'staging':
     # Activate Django-Heroku.
     django_heroku.settings(locals())
+
+# Logging
+# Set the environment variable to DEBUG, INFO, WARNING, CRITICAL or ERROR
+# Leave empty to leave logging disabled
+if os.getenv('LOGGING'):
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'console': {
+                'level': os.getenv('LOGGING'),
+                'class': 'logging.StreamHandler',
+            },
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['console'],
+            },
+        },
+        'root': {'level': os.getenv('LOGGING'), 'handlers': ['console']},
+    }
