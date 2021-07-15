@@ -17,6 +17,7 @@ from pathlib import Path
 # For Heroku deployments
 if os.getenv('APP_ENV') == 'staging':
     import django_heroku
+    import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -96,9 +97,15 @@ WSGI_APPLICATION = 'timelinor.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+DATABASES = {}
+
 if os.getenv('APP_ENV') == 'staging':
     # Heroku postgres config
-    pass
+    DATABASES['default'] = dj_database_url.config(
+        'postgres://fvbuzfsazmgmem:9cd6a0e4369ace12958ce573e20954a225b8fe00a71d4b09c4c8bce2f2b1593a@ec2-54-220-195-236.eu-west-1.compute.amazonaws.com:5432/devoto7thru5t9',
+        conn_max_age=600,
+        ssl_require=True,
+    )
 else:
     # Local postgres config
     DATABASES = {
@@ -146,8 +153,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'static_root'))
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'media'))
 
 # For Heroku deployments
 if os.getenv('APP_ENV') == 'staging':
