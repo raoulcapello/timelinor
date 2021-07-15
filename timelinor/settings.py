@@ -158,7 +158,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # For Heroku deployments
-if os.getenv('APP_ENV') == 'staging':
+if os.getenv('APP_ENV') != 'dev':
     # Activate Django-Heroku.
     django_heroku.settings(locals())
 
