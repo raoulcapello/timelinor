@@ -1,0 +1,87 @@
+                {% extends 'timelinor/base_landing.html' %}
+                {% load static %}
+
+                {% block content %}
+
+
+
+                <div class="container py-5 py-md-7 mt-5">
+                    <div class="row align-items-center pt-2">
+                        <div class="col-md-6 col-lg-5 mb-5 mb-md-0">
+
+                            {% if message_warning %}
+                            <!-- Warning alert -->
+                            <div class="alert alert-warning" role="alert">
+                                {{ message_warning }}
+                            </div>
+                            {% endif %}
+
+                            <div class="bg-secondary px-4 py-5 p-sm-5 rounded-3">
+                                <h1 class="h3 pt-1">Sign in</h1>
+                                <p class="fs-ms text-muted">Sign in to your account using email and password provided during registration.</p>
+                                <form method="post" action="{% url 'login' %}" class="needs-validation" novalidate>
+                                    {% csrf_token %}
+                                    <div class="input-group mb-3">
+                                        <i class="ai-user position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                                        <input class="form-control rounded" type="username" name="username" placeholder="Username" autocomplete='false' autofocus required>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <i class="ai-lock position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                                        <div class="password-toggle w-100">
+                                            <input class="form-control" type="password" name="password" placeholder="Password" required>
+                                            <label class="password-toggle-btn" aria-label="Show/hide password">
+                                                <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-3 pb-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="keep-signed-2">
+                                            <label class="form-check-label fs-sm" for="keep-signed-2">Keep me signed in</label>
+                                        </div><a class="nav-link-style fs-ms" href="password-recovery.html">Forgot password?</a>
+                                    </div>
+                                    <button class="btn btn-primary d-block w-100" type="submit">Sign in</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-6 offset-lg-1">
+                            <h2 class="h3">No account? Sign up</h2>
+                            <p class="fs-ms text-muted">Registration takes less than a minute.</p>
+                            <form method="post" action="{% url 'register' %}" class="row needs-validation" novalidate>
+                                <div class="col-sm-6 mb-3">
+                                    <label class="form-label" for="reg-fn">First name<sup class="text-danger ms-1">*</sup></label>
+                                    <input class="form-control" type="text" required id="reg-fn">
+                                    <div class="invalid-feedback">Please enter you first name!</div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <label class="form-label" for="reg-ln">Last name<sup class="text-danger ms-1">*</sup></label>
+                                    <input class="form-control" type="text" required id="reg-ln">
+                                    <div class="invalid-feedback">Please enter you last name!</div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <label class="form-label" for="reg-email">Email address<sup class="text-danger ms-1">*</sup></label>
+                                    <input class="form-control" type="email" required id="reg-email">
+                                    <div class="invalid-feedback">Please enter a valid email address!</div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <label class="form-label" for="reg-phone">Phone number</label>
+                                    <input class="form-control bg-image-0" type="text" id="reg-phone">
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <label class="form-label" for="reg-password">Password<sup class="text-danger ms-1">*</sup></label>
+                                    <input class="form-control" type="password" required id="reg-password">
+                                    <div class="invalid-feedback">Please provide password!</div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <label class="form-label" for="reg-confirm-password">Confirm password<sup class="text-danger ms-1">*</sup></label>
+                                    <input class="form-control" type="password" required id="reg-confirm-password">
+                                    <div class="invalid-feedback">Password doesn't match!</div>
+                                </div>
+                                <div class="col-sm-6 pt-2">
+                                    <button class="btn btn-primary d-block w-100" type="submit">Sign up</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endblock content %}

@@ -1,0 +1,32 @@
+                {% load static %}
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="bg-light rounded-3 shadow-lg">
+                        <div class="px-4 py-4 mb-1 text-center">
+                            <img class="d-block rounded-circle mx-auto my-2" src="{% static 'img/user-2.svg' %}" at="{{ request.user.first_name }} {{ request.user.last_name }}" width="110">
+                            <h6 class="mb-0 pt-1">{{ request.user.first_name }} {{ request.user.last_name }}</h6>
+                            <span class="text-muted fs-sm">@{{ request.user.username }}</span>
+                        </div>
+                        <div class="d-lg-none px-4 pb-4 text-center">
+                            <a class="btn btn-primary px-5 mb-2" href="#account-menu" data-bs-toggle="collapse">
+                                <i class="ai-menu me-2"></i>
+                                Timeline menu
+                            </a>
+                        </div>
+                        <div class="d-lg-block collapse pb-2" id="account-menu">
+                            <h3 class="d-block bg-secondary fs-sm fw-semibold text-muted mb-0 px-4 py-3">Dashboard</h3>
+                            <a class="d-flex align-items-center nav-link-style px-4 py-3" href="#">
+                                <i class="ai-fast-forward fs-lg opacity-60 me-2"></i>
+                                My Timelines
+                                <span class="text-muted fs-sm fw-normal ms-auto">2</span>
+                            </a>
+                            <h3 class="d-block bg-secondary fs-sm fw-semibold text-muted mb-0 px-4 py-3">Account settings</h3>
+                            <a class="d-flex align-items-center nav-link-style px-4 py-3" href="{% url 'profile' %}">
+                                Profile info
+                            </a>
+                            <a class="d-flex align-items-center nav-link-style px-4 py-3 border-top" href="{% url 'logout' %}">
+                                <i class="ai-log-out fs-lg opacity-60 me-2"></i>
+                                Sign out
+                            </a>
+                        </div>
+                    </div>
+                </div>

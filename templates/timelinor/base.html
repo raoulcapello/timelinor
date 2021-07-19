@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Timelinor | {% block title %}Timeline Creator{% endblock title %}</title>
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% include 'partials/_head.html' %}
+
+</head>
+
+<body style="background-color:#f7f7fc;">
+
+    <main class="page-wrapper">
+
+        <!-- Navbar -->
+        {% include 'partials/_nav_top.html' %}
+
+        <!-- Slanted background-->
+        <div class="position-relative bg-gradient" style="height: 480px;">
+            <div class="shape shape-bottom shape-slant bg-secondary d-none d-lg-block">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 260">
+                    <polygon fill="currentColor" points="0,257 0,260 3000,260 3000,0"></polygon>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Page content-->
+        <div class="container position-relative zindex-5 pb-4 mb-md-3" style="margin-top: -350px;">
+            <div class="row">
+
+                <!-- Sidebar-->
+                {% include 'partials/_sidebar.html' %}
+
+                <!-- Content-->
+                {% block content %}{% endblock content %}
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer-->
+    {% include 'partials/_footer.html' %}
+
+    <!-- Back to top button-->
+    <a class="btn-scroll-top" href="#top" data-scroll data-fixed-element>
+        <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
+        <i class="btn-scroll-top-icon ai-arrow-up"> </i>
+    </a>
+
+    <!-- Scripts -->
+    {% include 'partials/_scripts.html' %}
+
+</body>
+
+</html>

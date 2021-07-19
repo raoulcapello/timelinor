@@ -1,9 +1,9 @@
-        {% extends 'timelinor/base.html' %}
+        {% extends 'timelinor/base_landing.html' %}
         {% load static %}
 
         {% block content %}
         <!-- Hero-->
-        <section class="jarallax bg-dark pt-5 pt-lg-7 pb-7" data-jarallax data-speed="0.3">
+        <section class="jarallax bg-dark pt-5 pb-7" data-jarallax data-speed="0.3">
             <div class="jarallax-img" style="background-image: url({% static 'img/cubes-bg.jpg' %});"></div>
             <div class="shape shape-bottom shape-curve bg-body">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
@@ -12,6 +12,15 @@
             </div>
             <!-- Text-->
             <div class="container position-relative zindex-5 text-center pt-6 pt-lg-7">
+                <!-- Messages -->
+                <div class="col-lg-6 mx-auto" style="min-height: 100px;">
+                    {% if message_success %}
+                    <!-- Warning alert -->
+                    <div class="alert alert-success" role="alert">
+                        {{ message_success }}
+                    </div>
+                    {% endif %}
+                </div>
                 <h2 class="fs-xl fw-normal text-light">Create your own timeline graphs that look great as part of any resume or portfolio!</h2>
                 <h1 class="text-light">Timelinor</h1>
             </div>
