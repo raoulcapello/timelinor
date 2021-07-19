@@ -7,16 +7,18 @@
                             <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="btn-close "></button>
                         </div>
                         <div class="modal-body px-4">
-                            <p class="fs-ms text-muted">Sign in to your account using email and password provided during registration.</p>
+                            <p class="fs-ms text-muted">Sign in to your account here.</p>
                             <form method="post" action="/accounts/login" class="needs-validation" novalidate>
                                 {% csrf_token %}
                                 <div class="mb-3">
-                                    <div class="input-group"><i class="ai-mail position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                                    <div class="input-group">
+                                        <i class="ai-mail position-absolute top-50 start-0 translate-middle-y ms-3"></i>
                                         <input class="form-control rounded" type="username" name="username" placeholder="Username" autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <div class="input-group"><i class="ai-lock position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                                    <div class="input-group">
+                                        <i class="ai-lock position-absolute top-50 start-0 translate-middle-y ms-3"></i>
                                         <div class="password-toggle w-100">
                                             <input class="form-control" type="password" name="password" placeholder="Password" required>
                                             <label class="password-toggle-btn" aria-label="Show/hide password">
@@ -42,25 +44,35 @@
                             <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="btn-close"></button>
                         </div>
                         <div class="modal-body px-4">
-                            <p class="fs-ms text-muted">Registration takes less than a minute but gives you full control over your orders.</p>
+                            <p class="fs-ms text-muted">Registration takes less than a minute.</p>
                             <form method="post" action="/accounts/register" class="needs-validation" novalidate>
                                 {% csrf_token %}
                                 <div class="mb-3">
-                                    <input class="form-control" type="text" placeholder="Full name" required>
+                                    <input class="form-control" type="text" name="username" placeholder="Username" autocomplete="off" required>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 mb-3">
+                                        <input class="form-control" type="text" name="first_name" autocomplete="off" placeholder="First name">
+                                    </div>
+                                    <div class="col-sm-6 mb-3">
+                                        <input class="form-control" type="text" name="last_name" autocomplete="off" placeholder="Last name">
+                                    </div>
                                 </div>
                                 <div class="mb-3">
-                                    <input class="form-control" type="text" placeholder="Email" required>
+                                    <input class="form-control" type="email" name="email" autocomplete="off" placeholder="Email">
                                 </div>
                                 <div class="mb-3 password-toggle">
-                                    <input class="form-control" type="password" placeholder="Password" required>
+                                    <input class="form-control" type="password" name="password" placeholder="Password" required>
                                     <label class="password-toggle-btn" aria-label="Show/hide password">
-                                        <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                                        <input class="password-toggle-check" type="checkbox">
+                                        <span class="password-toggle-indicator"></span>
                                     </label>
                                 </div>
                                 <div class="mb-3 password-toggle">
-                                    <input class="form-control" type="password" placeholder="Confirm password" required>
+                                    <input class="form-control" type="password" name="password2" placeholder="Confirm password" required>
                                     <label class="password-toggle-btn" aria-label="Show/hide password">
-                                        <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                                        <input class="password-toggle-check" type="checkbox">
+                                        <span class="password-toggle-indicator"></span>
                                     </label>
                                 </div>
                                 <button class="btn btn-primary d-block w-100" type="submit">Sign up</button>

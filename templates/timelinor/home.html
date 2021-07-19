@@ -14,10 +14,12 @@
             <div class="container position-relative zindex-5 text-center pt-6 pt-lg-7">
                 <!-- Messages -->
                 <div class="col-lg-6 mx-auto" style="min-height: 100px;">
-                    {% if message_success %}
-                    <!-- Warning alert -->
-                    <div class="alert alert-success" role="alert">
-                        {{ message_success }}
+                    {% if success_message %}
+                    <!-- Success alert -->
+                    <div class="alert d-flex alert-success alert-dismissible fade show" role="alert">
+                        <i class="ai-check-circle fs-xl me-3"></i>
+                        {{ success_message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     {% endif %}
                 </div>

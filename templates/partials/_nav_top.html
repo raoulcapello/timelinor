@@ -18,7 +18,12 @@
                     </a>
                     {% else %}
                     <div class="navbar-tool dropdown">
-                        <a class="navbar-tool-icon-box" href="{% url 'profile' %}"><img class="navbar-tool-icon-box-img" src="{% static 'img/user-2.svg' %}" alt="Avatar"></a><a class="navbar-tool-label dropdown-toggle" href="{% url 'profile' %}"><small>Hello,</small>{{ request.user.first_name }}</a>
+                        <a class="navbar-tool-icon-box" href="{% url 'profile' %}">
+                            <img class="navbar-tool-icon-box-img" src="{% static 'img/user-2.svg' %}" alt="Avatar">
+                        </a>
+                        <a class="navbar-tool-label dropdown-toggle" href="{% url 'profile' %}">
+                            <small>Hello,</small>{{ request.user.first_name|default:request.user.username }}
+                        </a>
                         <ul class="dropdown-menu dropdown-menu-end" style="width: 15rem;">
                             <li>
                                 <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
