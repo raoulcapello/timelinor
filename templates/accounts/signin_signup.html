@@ -3,21 +3,12 @@
 
                 {% block content %}
 
+                <div class="container py-5 py-md-7">
 
+                    {% include 'partials/_messages.html' %}
 
-                <div class="container py-5 py-md-7 mt-5">
                     <div class="row align-items-center pt-2">
                         <div class="col-md-6 col-lg-5 mb-5 mb-md-0">
-
-                            {% if warning_message %}
-                            <!-- Warning alert -->
-                            <div class="alert d-flex alert-warning alert-dismissible fade show" role="alert">
-                                <i class="ai-alert-triangle fs-xl me-3"></i>
-                                {{ warning_message }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                            {% endif %}
-
                             <div class="bg-secondary px-4 py-5 p-sm-5 rounded-3">
                                 <h1 class="h3 pt-1">Sign in</h1>
                                 <p class="fs-ms text-muted">Sign in to your account using email and password provided during registration.</p>
@@ -50,33 +41,42 @@
                             <h2 class="h3">No account? Sign up</h2>
                             <p class="fs-ms text-muted">Registration takes less than a minute.</p>
                             <form method="post" action="{% url 'register' %}" class="row needs-validation" novalidate>
+                                {% csrf_token %}
+                                {{ register_form.non_field_errors }}
                                 <div class="col-sm-6 mb-3">
-                                    <label class="form-label" for="reg-fn">First name<sup class="text-danger ms-1">*</sup></label>
-                                    <input class="form-control" type="text" required id="reg-fn">
-                                    <div class="invalid-feedback">Please enter you first name!</div>
+                                    <label class="form-label" for="reg-email">Username<sup class="text-danger ms-1">*</sup></label>
+                                    {{ register_form.username }}
+                                    {{ register_form.username.errors }}
+                                    <div class="invalid-feedback">Please enter a valid username!</div>
                                 </div>
                                 <div class="col-sm-6 mb-3">
-                                    <label class="form-label" for="reg-ln">Last name<sup class="text-danger ms-1">*</sup></label>
-                                    <input class="form-control" type="text" required id="reg-ln">
-                                    <div class="invalid-feedback">Please enter you last name!</div>
-                                </div>
-                                <div class="col-sm-6 mb-3">
-                                    <label class="form-label" for="reg-email">Email address<sup class="text-danger ms-1">*</sup></label>
-                                    <input class="form-control" type="email" required id="reg-email">
+                                    <label class="form-label" for="reg-email">Email address</label>
+                                    {{ register_form.email }}
+                                    {{ register_form.email.errors }}
                                     <div class="invalid-feedback">Please enter a valid email address!</div>
                                 </div>
                                 <div class="col-sm-6 mb-3">
-                                    <label class="form-label" for="reg-phone">Phone number</label>
-                                    <input class="form-control bg-image-0" type="text" id="reg-phone">
+                                    <label class="form-label" for="reg-fn">First name</label>
+                                    {{ register_form.first_name }}
+                                    {{ register_form.first_name.errors }}
+                                    <div class="invalid-feedback">Please enter you first name!</div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <label class="form-label" for="reg-ln">Last name</label>
+                                    {{ register_form.last_name }}
+                                    {{ register_form.last_name.errors }}
+                                    <div class="invalid-feedback">Please enter you last name!</div>
                                 </div>
                                 <div class="col-sm-6 mb-3">
                                     <label class="form-label" for="reg-password">Password<sup class="text-danger ms-1">*</sup></label>
-                                    <input class="form-control" type="password" required id="reg-password">
+                                    {{ register_form.password1 }}
+                                    {{ register_form.password1.errors }}
                                     <div class="invalid-feedback">Please provide password!</div>
                                 </div>
                                 <div class="col-sm-6 mb-3">
                                     <label class="form-label" for="reg-confirm-password">Confirm password<sup class="text-danger ms-1">*</sup></label>
-                                    <input class="form-control" type="password" required id="reg-confirm-password">
+                                    {{ register_form.password2 }}
+                                    {{ register_form.password2.errors }}
                                     <div class="invalid-feedback">Password doesn't match!</div>
                                 </div>
                                 <div class="col-sm-6 pt-2">

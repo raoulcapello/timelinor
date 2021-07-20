@@ -12,17 +12,9 @@
             </div>
             <!-- Text-->
             <div class="container position-relative zindex-5 text-center pt-6 pt-lg-7">
-                <!-- Messages -->
-                <div class="col-lg-6 mx-auto" style="min-height: 100px;">
-                    {% if success_message %}
-                    <!-- Success alert -->
-                    <div class="alert d-flex alert-success alert-dismissible fade show" role="alert">
-                        <i class="ai-check-circle fs-xl me-3"></i>
-                        {{ success_message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    {% endif %}
-                </div>
+
+                {% include 'partials/_messages.html' %}
+
                 <h2 class="fs-xl fw-normal text-light">Create your own timeline graphs that look great as part of any resume or portfolio!</h2>
                 <h1 class="text-light">Timelinor</h1>
             </div>

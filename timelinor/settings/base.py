@@ -15,6 +15,11 @@ from pathlib import Path
 
 import environ
 
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 
 env = environ.Env(
     # set casting, default value

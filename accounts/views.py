@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login, logout
-from django.db import IntegrityError
+from django.contrib import messages
 
-from .models import User
+from .forms import RegisterUserForm
 
 
 def profile(request):
@@ -12,66 +12,49 @@ def profile(request):
 
 
 def login_view(request):
+    register_form = RegisterUserForm()
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+
         if user is not None:
             login(request, user)
-            return redirect(reverse('profile'))
-        else:
-            return render(
-                request,
-                'accounts/signin_signup.html',
-                {'warning_message': 'Invalid credentials, please try again.'},
-            )
+            return redirect('profile')
 
-    return render(request, 'accounts/signin_signup.html')
+        messages.error(request, 'Invalid credentials, please try again.')
+
+    return render(
+        request,
+        'accounts/signin_signup.html',
+        {'register_form': register_form},
+    )
 
 
 def logout_view(request):
     logout(request)
-    return render(
-        request,
-        'timelinor/home.html',
-        {'success_message': 'You have been logged out.'},
-    )
+    messages.success(request, 'You have been logged out.')
+    return redirect('home')
 
 
 def register(request):
     if request.method == 'POST':
-        # Get user data
-        username = request.POST['username']
-        password = request.POST['password']
-        password2 = request.POST['password2']
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-
-        # Check if passwords match
-        if password != password2:
-            return render(
-                request,
-                'accounts/signin_signup.html',
-                {'warning_message': 'Passwords don\'t match.'},
+        register_form = RegisterUserForm(request.POST)
+        if register_form.is_valid():
+            register_form.save()
+            username = register_form.cleaned_data.get('username')
+            messages.success(
+                request, f'Account created for {username}, please log in!'
             )
+            return redirect('register')
+        else:
+            messages.error(request, 'Something went wrong.')
 
-        # Create user, will fail if username exists
-        try:
-            User.objects.create_user(
-                username=username,
-                password=password,
-                first_name=first_name,
-                last_name=last_name,
-            )
-        except IntegrityError:
-            return render(
-                request,
-                'accounts/signin_signup.html',
-                {'warning_message': 'Username unavailable.'},
-            )
+    else:
+        register_form = RegisterUserForm()
 
-        return render(
-            request,
-            'accounts/signin_signup.html',
-            {'message_success': 'Account created, please log in.'},
-        )
+    return render(
+        request,
+        'accounts/signin_signup.html',
+        {'register_form': register_form},
+    )

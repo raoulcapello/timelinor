@@ -12,7 +12,7 @@
                                 {% csrf_token %}
                                 <div class="mb-3">
                                     <div class="input-group">
-                                        <i class="ai-mail position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                                        <i class="ai-user position-absolute top-50 start-0 translate-middle-y ms-3"></i>
                                         <input class="form-control rounded" type="username" name="username" placeholder="Username" autocomplete="off" required>
                                     </div>
                                 </div>
@@ -47,29 +47,36 @@
                             <p class="fs-ms text-muted">Registration takes less than a minute.</p>
                             <form method="post" action="/accounts/register" class="needs-validation" novalidate>
                                 {% csrf_token %}
+                                {{ register_form.non_field_errors }}
                                 <div class="mb-3">
-                                    <input class="form-control" type="text" name="username" placeholder="Username" autocomplete="off" required>
+                                    {{ register_form.username }}
+                                    {{ register_form.username.errors }}
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6 mb-3">
-                                        <input class="form-control" type="text" name="first_name" autocomplete="off" placeholder="First name">
+                                        {{ register_form.first_name }}
+                                        {{ register_form.first_name.errors }}
                                     </div>
                                     <div class="col-sm-6 mb-3">
-                                        <input class="form-control" type="text" name="last_name" autocomplete="off" placeholder="Last name">
+                                        {{ register_form.last_name }}
+                                        {{ register_form.last_name.errors }}
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <input class="form-control" type="email" name="email" autocomplete="off" placeholder="Email">
+                                    {{ register_form.email }}
+                                    {{ register_form.email.errors }}
                                 </div>
                                 <div class="mb-3 password-toggle">
-                                    <input class="form-control" type="password" name="password" placeholder="Password" required>
+                                    {{ register_form.password1 }}
+                                    {{ register_form.password1.errors }}
                                     <label class="password-toggle-btn" aria-label="Show/hide password">
                                         <input class="password-toggle-check" type="checkbox">
                                         <span class="password-toggle-indicator"></span>
                                     </label>
                                 </div>
                                 <div class="mb-3 password-toggle">
-                                    <input class="form-control" type="password" name="password2" placeholder="Confirm password" required>
+                                    {{ register_form.password2 }}
+                                    {{ register_form.password2.errors }}
                                     <label class="password-toggle-btn" aria-label="Show/hide password">
                                         <input class="password-toggle-check" type="checkbox">
                                         <span class="password-toggle-indicator"></span>
