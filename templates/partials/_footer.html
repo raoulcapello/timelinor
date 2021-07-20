@@ -7,9 +7,8 @@
                         <img src="{% static 'img/logo/timelinor-logo.svg' %}" width="80" alt="Timelinor">
                     </a>
                     <p class="fs-sm text-light opacity-60 pb-2 pb-sm-3">Timelinor. Create your own timelines for your portfolio or resume website.</p>
-                    <a class="btn-social bs-outline bs-facebook bs-light bs-lg me-2 mb-2" href="#"><i class="ai-facebook"></i></a>
-                    <a class="btn-social bs-outline bs-twitter bs-light bs-lg me-2 mb-2" href="#"><i class="ai-twitter"></i></a>
-                    <a class="btn-social bs-outline bs-instagram bs-light bs-lg me-2 mb-2" href="#"><i class="ai-instagram"></i></a><a class="btn-social bs-outline bs-google bs-light bs-lg me-2 mb-2" href="#"><i class="ai-google"></i></a>
+                    <a class="btn-social bs-outline bs-facebook bs-light bs-lg me-2 mb-2" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"><i class="ai-facebook"></i></a>
+                    <a class="btn-social bs-outline bs-twitter bs-light bs-lg me-2 mb-2" href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}"><i class="ai-twitter"></i></a>
                 </div>
             </div>
             <hr class="my-0 border-light">
