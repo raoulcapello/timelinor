@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
@@ -7,7 +7,7 @@ from .forms import RegisterUserForm
 
 def profile(request):
     if not request.user.is_authenticated:
-        return redirect(reverse('login'))
+        return redirect('login')
     return render(request, 'accounts/profile.html')
 
 
@@ -47,8 +47,9 @@ def register(request):
                 request, f'Account created for {username}, please log in!'
             )
             return redirect('register')
-        else:
-            messages.error(request, 'Something went wrong.')
+
+        # Form invalid
+        messages.error(request, 'Something went wrong, see fields below.')
 
     else:
         register_form = RegisterUserForm()
