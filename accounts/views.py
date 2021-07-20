@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.hashers import make_password
+from django.db import IntegrityError
 
 from .models import User
 
@@ -47,15 +47,6 @@ def register(request):
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
 
-        # Check if username is available
-        user, created = User.objects.get_or_create(username=username)
-        if not created:
-            return render(
-                request,
-                'accounts/signin_signup.html',
-                {'warning_message': 'Username unavailable.'},
-            )
-
         # Check if passwords match
         if password != password2:
             return render(
@@ -64,12 +55,20 @@ def register(request):
                 {'warning_message': 'Passwords don\'t match.'},
             )
 
-        # If all valid, create user, and redirect to login page
-        user.password = make_password(password)
-        user.first_name = first_name
-        user.last_name = last_name
-
-        user.save()
+        # Create user, will fail if username exists
+        try:
+            User.objects.create_user(
+                username=username,
+                password=password,
+                first_name=first_name,
+                last_name=last_name,
+            )
+        except IntegrityError:
+            return render(
+                request,
+                'accounts/signin_signup.html',
+                {'warning_message': 'Username unavailable.'},
+            )
 
         return render(
             request,
