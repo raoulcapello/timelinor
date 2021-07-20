@@ -1,0 +1,21 @@
+            {% extends 'timelinor/base_landing.html' %}
+            {% load static %}
+
+            {% block content %}
+            <div class="container d-flex flex-column justify-content-center pt-5 mt-n6" style="flex: 1 0 auto;">
+
+                {% include 'partials/_messages.html' %}
+
+                <div class="pt-7 pb-5">
+                    <div class="text-center mb-2 pb-4">
+                        <h1 class="mb-5">
+                            <img class="d-inline-block" src="{% static 'img/pages/404/404-text.svg' %}" alt="Error 404">
+                            <span class="visually-hidden">Error 404</span>
+                        </h1>
+                        <h2>Page not found!</h2>
+                        <p class="pb-2">It seems we can’t find the page you are looking for.</p>
+                        <a class="btn btn-translucent-primary me-3" href="{% url 'home' %}">Go to homepage</a>
+                    </div>
+                </div>
+            </div>
+            {% endblock content %}

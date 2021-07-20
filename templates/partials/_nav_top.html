@@ -1,8 +1,7 @@
         {% load static %}
         {% url 'home' as home_url %}
-        {% url 'login' as login_url %}
-        {% url 'register' as register_url %}
-        {% if request.path == login_url or request.path == register_url %}
+        {% url 'profile' as profile_url %}
+        {% if request.path != home_url and request.path != profile_url %}
         <header class="header navbar navbar-expand-lg navbar-light navbar-floating navbar-sticky" data-scroll-header data-fixed-element>
             {% else %}
             <header class="header navbar navbar-expand-lg navbar-dark navbar-floating navbar-sticky" data-scroll-header data-fixed-element>
