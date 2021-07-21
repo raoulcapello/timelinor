@@ -14,11 +14,17 @@
                                 <div class="d-block d-sm-flex align-items-center">
                                     <img class="d-block rounded-circle mx-sm-0 mx-auto mb-3 mb-sm-0" src="{% static 'img/user-2.svg' %}" alt="{{ request.user.first_name }} {{ request.user.last_name }}" width="110">
                                     <div class="ps-sm-3 text-center text-sm-start">
-                                        <button class="btn btn-light shadow btn-sm mb-2" type="button"><i class="ai-refresh-cw me-2"></i>Change avatar</button>
-                                        <div class="p mb-0 fs-ms text-muted">Upload JPG, GIF or PNG image. 300 x 300 required.</div>
+                                        <input type="file" name="profilepic" id="upload-profilepic-btn" hidden>
+                                        <label class="btn btn-light shadow btn-sm mb-2" for="upload-profilepic-btn">
+                                            <i class="ai-refresh-cw me-2"></i>
+                                            Change Avatar
+                                        </label>
+                                        <span id="file-chosen">No file chosen</span>
+                                        <div class="p mb-0 fs-ms text-muted">Upload JPG, GIF or PNG image. 300 x 300 recommended.</div>
                                     </div>
                                 </div>
                             </div>
+                            <script src="{% static 'js/timelinor.js' %}"></script>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3 pb-1">
