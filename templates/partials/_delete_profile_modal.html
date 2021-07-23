@@ -1,0 +1,23 @@
+                <!-- Warning Modal - Delete Profile -->
+                <div class="modal" id="delete-profile-modal" tabindex=" -1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">You're about to delete ALL your data!</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="fs-sm">All your profile data and your timeline graphs will be permanently deleted.</p>
+                                <p class="fs-sm"><b>Your data will NOT be recoverable in any way.</b></p>
+                                <p class="fs-sm">Are you sure you want to do this?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-info btn-sm" data-bs-dismiss="modal">On second thought, nah.</button>
+                                <form method="post" action="{% url 'delete-profile' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">Yes, delete ALL the things!</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>

@@ -2,7 +2,11 @@
                 <div class="col-lg-4 mb-4 mb-lg-0">
                     <div class="bg-light rounded-3 shadow-lg">
                         <div class="px-4 py-4 mb-1 text-center">
+                            {% if request.user.image %}
+                            <img class="d-block rounded-circle mx-auto my-2" src="{{ request.user.image.url|default_if_none:"/static/img/user-2.svg" }}" at="{{ request.user.first_name }} {{ request.user.last_name }}" width="110">
+                            {% else %}
                             <img class="d-block rounded-circle mx-auto my-2" src="{% static 'img/user-2.svg' %}" at="{{ request.user.first_name }} {{ request.user.last_name }}" width="110">
+                            {% endif %}
                             <h6 class="mb-0 pt-1">{{ request.user.first_name }} {{ request.user.last_name }}</h6>
                             <span class="text-muted fs-sm">@{{ request.user.username }}</span>
                         </div>

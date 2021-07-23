@@ -7,86 +7,84 @@
                         <div class="py-2 p-md-3">
                             <!-- Title + Delete link-->
                             <div class="d-sm-flex align-items-center justify-content-between pb-4 text-center text-sm-start">
-                                <h1 class="h3 mb-2 text-nowrap">Profile info</h1><a class="btn btn-link text-danger fw-medium btn-sm mb-2" href="#"><i class="ai-trash-2 fs-base me-2"></i>Delete account </a>
+                                <h1 class="h3 mb-2 text-nowrap">Profile info</h1>
+                                <a class="btn btn-link text-danger fw-medium btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#delete-profile-modal">
+                                    <i class="ai-trash-2 fs-base me-2"></i>
+                                    Delete account
+                                </a>
                             </div>
-                            <!-- Content-->
-                            <div class="bg-secondary rounded-3 p-4 mb-4">
-                                <div class="d-block d-sm-flex align-items-center">
-                                    <img class="d-block rounded-circle mx-sm-0 mx-auto mb-3 mb-sm-0" src="{% static 'img/user-2.svg' %}" alt="{{ request.user.first_name }} {{ request.user.last_name }}" width="110">
-                                    <div class="ps-sm-3 text-center text-sm-start">
-                                        <input type="file" name="profilepic" id="upload-profilepic-btn" hidden>
-                                        <label class="btn btn-light shadow btn-sm mb-2" for="upload-profilepic-btn">
-                                            <i class="ai-refresh-cw me-2"></i>
-                                            Change Avatar
-                                        </label>
-                                        <span id="file-chosen">No file chosen</span>
-                                        <div class="p mb-0 fs-ms text-muted">Upload JPG, GIF or PNG image. 300 x 300 recommended.</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <script src="{% static 'js/timelinor.js' %}"></script>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="mb-3 pb-1">
-                                        <label class="form-label px-0" for="account-fn">First Name</label>
-                                        <input class="form-control" type="text" id="account-fn" value="{{ request.user.first_name }}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="mb-3 pb-1">
-                                        <label class="form-label px-0" for="account-ln">Last Name</label>
-                                        <input class="form-control" type="text" id="account-ln" value="{{ request.user.last_name }}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="mb-3 pb-1">
-                                        <label class="form-label px-0" for="account-email">Email address</label>
-                                        <input class="form-control" type="text" id="account-email" value="{{ request.user.email }}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="mb-3 pb-1">
-                                        <label class="form-label px-0" for="account-username">Username</label>
-                                        <div class="input-group"><span class="input-group-text">@</span>
-                                            <input class="form-control" type="text" id="account-username" value="{{ request.user.username }}" disabled>
+                            <!-- Profile Details -->
+                            <form action="{% url 'profile' %}" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
+                                {% csrf_token %}
+                                {{ profile_form.non_field_errors }}
+                                <div class="bg-secondary rounded-3 p-4 mb-4">
+                                    <div class="d-block d-sm-flex align-items-center">
+                                        {% if request.user.image %}
+                                        <img class="d-block rounded-circle mx-sm-0 mx-auto mb-3 mb-sm-0" src="{{ request.user.image.url|default_if_none:"/static/img/user-2.svg" }}" alt="{{ request.user.first_name }} {{ request.user.last_name }}" width="110">
+                                        {% else %}
+                                        <img class="d-block rounded-circle mx-sm-0 mx-auto mb-3 mb-sm-0" src="{% static 'img/user-2.svg' %}" alt="{{ request.user.first_name }} {{ request.user.last_name }}" width="110">
+                                        {% endif %}
+                                        <div class="ps-sm-3 text-center text-sm-start">
+                                            {{ profile_form.image }}
+                                            {{ profile_form.image.errors }}
+                                            <label class="btn btn-light shadow btn-sm mb-2" for="upload-profilepic-btn">
+                                                <i class="ai-refresh-cw me-2"></i>
+                                                Change Avatar
+                                            </label>
+                                            <span id="file-chosen">No file chosen</span>
+                                            <div class="p mb-0 fs-ms text-muted">Upload JPG, GIF or PNG image. 300 x 300 recommended.</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="mb-3 pb-1">
-                                        <label class="form-label px-0" for="account-country">Country</label>
-                                        <select class="form-select" id="account-country">
-                                            <option value>Select country</option>
-                                            <option value="Argentina">Argentina</option>
-                                            <option value="Belgium">Belgium</option>
-                                            <option value="France">France</option>
-                                            <option value="Germany">Germany</option>
-                                            <option value="Madagascar">Madagascar</option>
-                                            <option value="Spain">Spain</option>
-                                            <option value="The Netherlands" selected>The Netherlands</option>
-                                            <option value="UK">United Kingdom</option>
-                                            <option value="USA">USA</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="mb-3 pb-1">
-                                        <label class="form-label px-0" for="account-city">City</label>
-                                        <input class="form-control" type="text" id="account-city" value="Amsterdam">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <hr class="mt-2 mb-4">
-                                    <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                        <div class="form-check d-block">
-                                            <input class="form-check-input" type="checkbox" id="show-email" checked>
-                                            <label class="form-check-label" for="show-email">Show my email to registered users</label>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="mb-3 pb-1">
+                                            <label class="form-label px-0" for="account-username">Username</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text">@</span>
+                                                <input class="form-control" type="text" value="{{ request.user.username }}" disabled>
+                                            </div>
                                         </div>
-                                        <button class="btn btn-primary mt-3 mt-sm-0" type="button"><i class="ai-save fs-lg me-2"></i>Save changes</button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="mb-3 pb-1">
+                                            <label class="form-label px-0" for="account-email">Email address</label>
+                                            {{ profile_form.email }}
+                                            {{ profile_form.email.errors }}
+                                            <div class="invalid-feedback">Please enter a valid email address!</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="mb-3 pb-1">
+                                            <label class="form-label px-0" for="account-fn">First Name</label>
+                                            {{ profile_form.first_name }}
+                                            {{ profile_form.first_name.errors }}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="mb-3 pb-1">
+                                            <label class="form-label px-0" for="account-ln">Last Name</label>
+                                            {{ profile_form.last_name }}
+                                            {{ profile_form.last_name.errors }}
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <hr class="mt-2 mb-4">
+                                        <div class="d-flex flex-wrap justify-content-end">
+                                            <button class="btn btn-primary mt-3 mt-sm-0 mr-auto" type="submit">
+                                                <i class="ai-save fs-lg me-2"></i>
+                                                Save changes
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
                 {% endblock content %}
+
+                {% block scripts %}
+                <!-- Custom scripts -->
+                <script src="{% static 'js/timelinor.js' %}"></script>
+                {% endblock scripts %}

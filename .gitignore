@@ -9,6 +9,7 @@ __pycache__/
 staticfiles/
 static_root/
 media_root/
+media/
 
 # SQLite
 db.sqlite3
