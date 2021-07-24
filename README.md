@@ -11,10 +11,17 @@ Built with:
 
 # Deployment
 
-Required environment variables in any environment:
-* SECRET_KEY
-* DEBUG
-* ALLOWED_HOSTS
+Required environment variables in any environment, that should never be part of the codebase for security reasons:
+* SECRET_KEY (Django uses this to secure the application, never share this key)
+* DEBUG (Security warning: always set this to False in public environments)
+* ALLOWED_HOSTS (This apps domainname)
+* AWS_ACCESS_KEY_ID (Amazon S3 storage backend)
+* AWS_SECRET_ACCESS_KEY (Amazon S3 storage backend)
+
+Required environment variables for local development Postgres Docker container
+* PG_NAME (Postgres database name)
+* PG_USER (Postgres username, has to be the same as PG_NAME otherwise Docker container won't be accessible)
+* PG_PASSWORD (Postgres database password)
 
 Optional:
 * DATABASES
