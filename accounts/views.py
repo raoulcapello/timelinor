@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 
 from .models import User
 from .forms import RegisterUserForm, UserProfileModelForm
@@ -46,6 +48,38 @@ def delete_profile(request):
             'Your user profile and all your data have been '
             + 'deleted as you requested.',
         )
+        return redirect('home')
+
+
+def password_reset(request):
+    return render(request, 'accounts/password_reset.html')
+
+
+def send_password_reset_link(request):
+
+    if request.method == 'POST':
+
+        to_address = request.POST.get('recovery-email')
+
+        subject = 'Your password reset link for Timelinor'
+        message = ''
+        from_address = settings.DEFAULT_FROM_EMAIL
+        to_addresses = [to_address]
+
+        smtp_response = send_mail(
+            subject,
+            message,
+            from_address,
+            to_addresses,
+            fail_silently=False,
+        )
+        if smtp_response == 1:
+            messages.success(request, 'Mail sent!')
+        else:
+            messages.error(
+                request, f'Mail not sent, return code {smtp_response}'
+            )
+
         return redirect('home')
 
 

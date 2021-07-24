@@ -17,6 +17,9 @@ Required environment variables in any environment, that should never be part of 
 * ALLOWED_HOSTS (This apps domainname)
 * AWS_ACCESS_KEY_ID (Amazon S3 storage backend)
 * AWS_SECRET_ACCESS_KEY (Amazon S3 storage backend)
+* EMAIL_HOST (SMTP server)
+* EMAIL_HOST_USER = (SMTP username)
+* EMAIL_HOST_PASSWORD = (SMTP password)
 
 Required environment variables for local development Postgres Docker container
 * PG_NAME (Postgres database name)

@@ -185,6 +185,14 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 DEFAULT_FILE_STORAGE = 'timelinor.settings.storage_backends.MediaStorage'
 
+# Email settings
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 # Logging
 # Set the environment variable to DEBUG, INFO, WARNING, CRITICAL or ERROR
 # Leave empty to leave logging disabled
