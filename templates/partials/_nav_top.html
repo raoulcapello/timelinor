@@ -26,9 +26,9 @@
                         <div class="navbar-tool dropdown">
                             <a class="navbar-tool-icon-box" href="{% url 'profile' %}">
                                 {% if request.user.image %}
-                                <img class="navbar-tool-icon-box-img" src="{{ request.user.image.url|default_if_none:"/static/img/user-2.svg" }}" alt="Avatar">
+                                <img class="navbar-tool-icon-box-img" src="{{ request.user.image.url|default_if_none:"/static/img/avatar.svg" }}" alt="Avatar">
                                 {% else %}
-                                <img class="navbar-tool-icon-box-img" src="{% static 'img/user-2.svg' %}" alt="Avatar">
+                                <img class="navbar-tool-icon-box-img" src="{% static 'img/avatar.svg' %}" alt="Avatar">
                                 {% endif %}
                             </a>
                             <a class="navbar-tool-label dropdown-toggle" href="{% url 'profile' %}">
