@@ -33,12 +33,6 @@ class LoggedInPasswordResetForm(forms.Form):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
 
-    # class Meta:
-    # model = User
-    # fields = [
-    #     'current_password',
-    # ]
-
     current_password = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder': 'Current password'})
     )
@@ -82,7 +76,6 @@ class RegisterUserForm(UserCreationForm):
         widget=forms.TextInput(attrs={'placeholder': 'Username'})
     )
     email = forms.EmailField(
-        required=False,
         widget=forms.EmailInput(attrs={'placeholder': 'Email'}),
     )
     first_name = forms.CharField(
