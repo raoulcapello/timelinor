@@ -18,10 +18,10 @@
                         </div>
                         <div class="d-lg-block collapse pb-2" id="account-menu">
                             <h3 class="d-block bg-secondary fs-sm fw-semibold text-muted mb-0 px-4 py-3">Dashboard</h3>
-                            <a class="d-flex align-items-center nav-link-style px-4 py-3" href="#">
+                            <a class="d-flex align-items-center nav-link-style px-4 py-3" href="{% url 'timelines:list' %}">
                                 <i class="ai-fast-forward fs-lg opacity-60 me-2"></i>
                                 My Timelines
-                                <span class="text-muted fs-sm fw-normal ms-auto">2</span>
+                                <span class="text-muted fs-sm fw-normal ms-auto">{{ timelines.count }}</span>
                             </a>
                             <h3 class="d-block bg-secondary fs-sm fw-semibold text-muted mb-0 px-4 py-3">Account settings</h3>
                             <a class="d-flex align-items-center nav-link-style px-4 py-3" href="{% url 'profile' %}">

@@ -1,0 +1,81 @@
+                {% extends 'timelinor/base_main.html' %}
+                {% load static %}
+
+                {% block head %}
+                <link rel="stylesheet" href="{% static 'css/timeline.css' %}">
+                {% endblock head %}
+
+                {% block content %}
+                <!-- Content-->
+                <div class="col-lg-8">
+                    <div class="d-flex flex-column bg-light rounded-3 shadow-lg p-4 mb-3">
+                        <div class="py-2 p-md-3">
+
+                            <!-- Widget Title + Create Event button-->
+                            <div class="d-sm-flex align-items-center justify-content-between pb-2 text-center text-sm-start">
+                                <h1 class="h3 mb-3 text-nowrap">New Timeline</h1>
+                                <div class="mb-3">
+                                    <a class="btn btn-translucent-primary" href="#message-compose" data-bs-toggle="collapse">
+                                        <i class="ai-plus me-2"></i>Create</a>
+                                </div>
+                            </div>
+
+                            <!-- Create Event form-->
+                            <div class="collapse" id="message-compose">
+
+                                <form class="needs-validation shadow rounded mb-4" novalidate>
+                                    <div class="d-flex align-items-center justify-content-between bg-dark rounded-top py-3 px-4">
+                                        <h3 class="fs-base text-light mb-0">New Timeline</h3><a class="btn-close btn-close-white" href="#message-compose" data-bs-toggle="collapse"></a>
+                                    </div>
+                                    <div class="p-4">
+                                        <div class="mb-3 pb-1">
+                                            <label class="form-label">Title</label>
+                                            <input class="form-control bg-image-0" type="text" placeholder="i.e. 'Job History' or 'Education'" required>
+                                            <div class="invalid-feedback">Please provide a title!</div>
+                                        </div>
+                                        <div class="mb-3 pb-1">
+                                            <label class="form-label">Description</label>
+                                            <textarea class="form-control" rows="5" placeholder="Max. 200 characters looks best on the timeline" required></textarea>
+                                            <div class="invalid-feedback">Please add a description!</div>
+                                        </div>
+                                        <button class="btn btn-primary" type="submit">Add Timeline</button>
+                                    </div>
+                                </form>
+
+                            </div> <!-- /.collapse -->
+
+                        </div> <!-- /.py-2 -->
+                    </div> <!-- /.d-flex -->
+
+                    <div class="d-flex flex-column bg-light rounded-3 shadow-lg p-4 mb-3">
+                        <div class="py-2 p-md-3">
+
+                            <!-- Widget Title -->
+                            <h1 class="h3 mb-3 text-nowrap">Your Timelines </h1>
+
+                            {% for timeline in timelines %}
+
+                            <!-- Timelines -->
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ timeline.title }}</h5>
+                                    <p class="card-text fs-sm">{{ timeline.description }}</p>
+                                    <a href="{% url 'timelines:view' timeline.id %}" class="btn btn-sm btn-primary">View Timeline</a>
+                                    <a href="#" class="btn btn-sm btn-warning">Edit Timeline</a>
+                                </div>
+                            </div> <!-- /.card -->
+
+                            {% empty %}
+
+                            <p>
+                                You don't have any timelines at the moment. <br />
+                                <br />
+                                Create one now, it only takes a moment!
+                            </p>
+
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+                {% endblock content %}

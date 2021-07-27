@@ -1,7 +1,8 @@
         {% load static %}
         {% url 'home' as home_url %}
         {% url 'profile' as profile_url %}
-        {% if request.path != home_url and request.path != profile_url %}
+        {% url 'timelines:list' as timeline_list_url %}
+        {% if request.path != home_url and request.path != profile_url and request.path != timeline_list_url %}
         <header class="header navbar navbar-expand-lg navbar-light navbar-floating navbar-sticky" data-scroll-header data-fixed-element>
             {% else %}
             <header class="header navbar navbar-expand-lg navbar-dark navbar-floating navbar-sticky" data-scroll-header data-fixed-element>
@@ -54,14 +55,14 @@
                             <ul class="navbar-nav">
                                 {% if request.user.is_authenticated %}
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link dropdown-toggle" href="{% url 'timelines:view' 1 %}" data-bs-toggle="dropdown">My Timelinor</a>
+                                    <a class="nav-link dropdown-toggle" href="{% url 'timelines:list' %}" data-bs-toggle="dropdown">My Timelinor</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-column dropdown-column-img" href="home.html" style="background-image: url({% static 'img/logo/timelinor-logo.svg' %});"></a>
+                                        <a class="dropdown-column dropdown-column-img" href="{% url 'timelines:list' %}" style="background-image: url({% static 'img/logo/timelinor-logo.svg' %});"></a>
                                         <div class="dropdown-column">
                                             <a class="dropdown-item" href="{% url 'home' %}">Home</a>
                                         </div>
                                         <div class="dropdown-column">
-                                            <a class="dropdown-item" href="{% url 'timelines:view' 1 %}">My Timelines</a>
+                                            <a class="dropdown-item" href="{% url 'timelines:list' %}">My Timelines</a>
                                         </div>
                                     </div>
                                 </li>
