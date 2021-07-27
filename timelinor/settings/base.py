@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     # Homemade
     'frontend.apps.FrontendConfig',
     'accounts.apps.AccountsConfig',
+    'timelines.apps.TimelinesConfig',
 ]
 
 MIDDLEWARE = [
