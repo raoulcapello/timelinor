@@ -1,11 +1,9 @@
-                {% extends 'timelinor/base_landing.html' %}
+                {% extends 'timelinor/base.html' %}
                 {% load static %}
 
                 {% block content %}
 
-                <div class="container py-5 py-md-7">
-
-                    {% include 'partials/_messages.html' %}
+                <div class="container pb-5 pb-md-7">
 
                     <div class="row align-items-center pt-2">
                         <div class="col-md-6 col-lg-5 mb-5 mb-md-0">
@@ -31,7 +29,8 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="keep-signed-2">
                                             <label class="form-check-label fs-sm" for="keep-signed-2">Keep me signed in</label>
-                                        </div><a class="nav-link-style fs-ms" href="{% url 'password-reset' %}">Forgot password?</a>
+                                        </div>
+                                        <a class="nav-link-style fs-ms" href="{% url 'password_reset' %}">Forgot password?</a>
                                     </div>
                                     <button class="btn btn-primary d-block w-100" type="submit">Sign in</button>
                                 </form>

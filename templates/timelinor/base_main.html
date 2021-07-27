@@ -1,0 +1,46 @@
+{% extends 'timelinor/base.html' %}
+{% load static %}
+
+{% block body_tag %}
+
+<body style="background-color:#f7f7fc;">{% endblock body_tag %}
+
+    {% block modal %}
+    <!-- User Profile Modals-->
+    {% include 'partials/_delete_profile_modal.html' %}
+    {% include 'partials/_reset_password_modal.html' %}
+    {% endblock modal %}
+
+    {% block slanted_background %}
+    <!-- Slanted background-->
+    <div class="position-relative bg-gradient" style="height: 480px;">
+        <div class="shape shape-bottom shape-slant bg-secondary d-none d-lg-block">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 260">
+                <polygon fill="currentColor" points="0,257 0,260 3000,260 3000,0"></polygon>
+            </svg>
+        </div>
+    </div>
+    {% endblock slanted_background %}
+
+    {% block messages_top %}{% endblock messages_top %}
+
+    {% block main %}
+    <!-- Page content-->
+    <div class="container position-relative zindex-5 pb-4 mb-md-3" style="margin-top: -400px;">
+
+        {% block messages_mid %}
+        <!-- Messages -->
+        {% include 'partials/_messages.html' %}
+        {% endblock messages_mid %}
+
+        <div class="row">
+
+            <!-- Sidebar-->
+            {% include 'partials/_sidebar.html' %}
+
+            <!-- Content-->
+            {% block content %}{% endblock content %}
+
+        </div>
+    </div>
+    {% endblock main %}

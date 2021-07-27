@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Third party
     'storages',
+    'crispy_forms',
     # Homemade
     'frontend.apps.FrontendConfig',
     'accounts.apps.AccountsConfig',
@@ -192,6 +193,12 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+# Other settings
+SITE_PROTOCOL = 'https'  # Used in password reset email
+
+# Crispy forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Logging
 # Set the environment variable to DEBUG, INFO, WARNING, CRITICAL or ERROR

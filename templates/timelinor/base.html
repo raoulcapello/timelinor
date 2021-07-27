@@ -10,44 +10,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {% include 'partials/_head.html' %}
+    {% block head %}{% endblock head %}
 
 </head>
 
-<body style="background-color:#f7f7fc;">
+{% block body_tag %}
+
+<body>{% endblock body_tag %}
 
     <main class="page-wrapper">
 
-        <!-- Modals -->
-        {% include 'partials/_delete_profile_modal.html' %}
+        {% block modal %}
+        <!-- Sign In Modal-->
+        {% include 'partials/_signin_modals.html' %}
+        {% endblock modal %}
 
+        {% block navbar %}
         <!-- Navbar -->
         {% include 'partials/_nav_top.html' %}
+        {% endblock navbar %}
 
-        <!-- Slanted background-->
-        <div class="position-relative bg-gradient" style="height: 480px;">
-            <div class="shape shape-bottom shape-slant bg-secondary d-none d-lg-block">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 260">
-                    <polygon fill="currentColor" points="0,257 0,260 3000,260 3000,0"></polygon>
-                </svg>
-            </div>
-        </div>
+        {% block slanted_background %}{% endblock slanted_background %}
 
-        <!-- Page content-->
-        <div class="container position-relative zindex-5 pb-4 mb-md-3" style="margin-top: -400px;">
-
-            <!-- Messages -->
+        {% block messages_top %}
+        <!-- Messages -->
+        <div class="container pt-7">
             {% include 'partials/_messages.html' %}
-
-            <div class="row">
-
-                <!-- Sidebar-->
-                {% include 'partials/_sidebar.html' %}
-
-                <!-- Content-->
-                {% block content %}{% endblock content %}
-
-            </div>
         </div>
+        {% endblock messages_top %}
+
+        {% block main %}
+        <!-- Content-->
+        {% block content %}{% endblock content %}
+        {% endblock main %}
 
     </main>
 

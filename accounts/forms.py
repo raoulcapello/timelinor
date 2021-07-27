@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 
 from .models import User
 
@@ -23,6 +23,40 @@ class UserProfileModelForm(forms.ModelForm):
                 'hidden': True,
             }
         ),
+    )
+
+
+class LoggedInPasswordResetForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Add form-control class to all visible fields
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+
+    # class Meta:
+    # model = User
+    # fields = [
+    #     'current_password',
+    # ]
+
+    current_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Current password'})
+    )
+    new_password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'New password'})
+    )
+    new_password2 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Confirm new password'}
+        )
+    )
+
+
+class CustomPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(
+        widget=forms.EmailInput(
+            attrs={'class': 'form-control', 'placeholder': 'Email address'}
+        )
     )
 
 
