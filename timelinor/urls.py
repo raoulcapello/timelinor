@@ -23,6 +23,7 @@ from frontend import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('accounts/', include('accounts.urls')),
+    path('timelines/', include('timelines.urls')),
     path('admin/', admin.site.urls),
 ]
 

@@ -54,14 +54,14 @@
                             <ul class="navbar-nav">
                                 {% if request.user.is_authenticated %}
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link dropdown-toggle" href="view-timelines.html" data-bs-toggle="dropdown">My Timelinor</a>
+                                    <a class="nav-link dropdown-toggle" href="{% url 'timelines:view' 1 %}" data-bs-toggle="dropdown">My Timelinor</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-column dropdown-column-img" href="home.html" style="background-image: url({% static 'img/logo/timelinor-logo.svg' %});"></a>
                                         <div class="dropdown-column">
                                             <a class="dropdown-item" href="{% url 'home' %}">Home</a>
                                         </div>
                                         <div class="dropdown-column">
-                                            <a class="dropdown-item" href="view-timelines.html">My Timelines</a>
+                                            <a class="dropdown-item" href="{% url 'timelines:view' 1 %}">My Timelines</a>
                                         </div>
                                     </div>
                                 </li>

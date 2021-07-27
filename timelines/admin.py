@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Timeline, TimelineEvent
+
+admin.site.register(Timeline)
+admin.site.register(TimelineEvent)

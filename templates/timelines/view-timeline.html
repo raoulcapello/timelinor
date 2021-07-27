@@ -1,0 +1,45 @@
+                {% extends 'timelinor/base.html' %}
+                {% load static %}
+
+                {% block head %}
+                <link rel="stylesheet" href="{% static 'css/timeline.css' %}">
+                {% endblock head %}
+
+                {% block content %}
+
+                <!-- Page content-->
+
+                <!-- Project title-->
+                <section class="container">
+                    <h1 class="h2">{{ timeline.title }}</h1>
+                </section>
+
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="main-timeline">
+
+                                {% for event in timeline_events %}
+
+                                <div class="timeline">
+                                    <div class="timeline-icon">
+                                        <i class="fa fa-{% cycle 'globe' 'rocket' 'briefcase' 'mobile' %}"></i>
+                                    </div>
+                                    <span class="year">{{ event.title }}</span>
+                                    <div class="timeline-content">
+                                        <h5 class="title">{{ event.subtitle }}</h5>
+                                        <p class="description">
+                                            {{ event.description }}
+                                        </p>
+                                    </div>
+                                </div> <!-- /.timeline-->
+
+                                {% endfor %}
+
+                            </div> <!-- /.main-timeline -->
+                        </div> <!-- /.col -->
+                    </div> <!-- /.row -->
+                </div> <!-- /.container -->
+
+                {% endblock content %}
