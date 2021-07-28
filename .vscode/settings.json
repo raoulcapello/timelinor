@@ -27,7 +27,7 @@
   // Black version 20.8b1 has a bug that doesn't add a newline
   // to the end of a file, so let's make sure
   "files.insertFinalNewline": true,
-  // Format code on paste and save
+  // Format code on save
   "editor.formatOnSave": true,
   // Get rid of annoying error popup:
   // 'Black does not support the "Format Selection" command'
