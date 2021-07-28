@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.mail import send_mail, BadHeaderError
@@ -11,13 +11,14 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 
-from .models import User
 from .forms import (
     RegisterUserForm,
     UserProfileModelForm,
     LoggedInPasswordResetForm,
     CustomPasswordResetForm,
 )
+
+User = get_user_model()
 
 
 @login_required
