@@ -14,12 +14,13 @@ Built with:
 Required environment variables in any environment, that should never be part of the codebase for security reasons:
 * SECRET_KEY (Django uses this to secure the application, never share this key)
 * DEBUG (Security warning: always set this to False in public environments)
-* ALLOWED_HOSTS (This apps domainname)
+* ALLOWED_HOSTS (This apps domainname - can add multiple separated by comma's)
 * AWS_ACCESS_KEY_ID (Amazon S3 storage backend)
 * AWS_SECRET_ACCESS_KEY (Amazon S3 storage backend)
 * EMAIL_HOST (SMTP server)
-* EMAIL_HOST_USER = (SMTP username)
-* EMAIL_HOST_PASSWORD = (SMTP password)
+* EMAIL_HOST_USER (SMTP username)
+* EMAIL_HOST_PASSWORD (SMTP password)
+* DEFAULT_FROM_EMAIL (Default from email)
 
 Required environment variables for local development Postgres Docker container
 * PG_NAME (Postgres database name)
