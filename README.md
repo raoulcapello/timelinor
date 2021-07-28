@@ -46,3 +46,8 @@ See the various settings files in the settings folder for further details.
 See the docs:
 * [Heroku Docs - Django deployment](https://devcenter.heroku.com/articles/django-app-configuration)
 * [Video explaining the basics](https://www.youtube.com/watch?v=1923eduj0Gg)
+
+
+# Models
+
+* Note that a [custom User model](https://docs.djangoproject.com/en/3.2/topics/auth/customizing/#using-a-custom-user-model-when-starting-a-project) is used, make sure to [correctly reference](https://docs.djangoproject.com/en/3.2/topics/auth/customizing/#referencing-the-user-model) it in views and models
