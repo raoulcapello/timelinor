@@ -60,8 +60,12 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ timeline.title }}</h5>
                                     <p class="card-text fs-sm">{{ timeline.description }}</p>
-                                    <a href="{% url 'timelines:view' timeline.id %}" class="btn btn-sm btn-primary">View Timeline</a>
-                                    <a href="#" class="btn btn-sm btn-warning">Edit Timeline</a>
+                                    <div class="row">
+                                        <div class="col-xs-3 g-3">
+                                            <a href="{% url 'timelines:view' timeline.id %}" class="btn btn-block btn-sm btn-primary">View Timeline</a>
+                                            <a href="#" class="btn btn-block btn-sm btn-warning">Edit Timeline</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div> <!-- /.card -->
 
