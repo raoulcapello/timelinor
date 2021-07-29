@@ -1,5 +1,5 @@
-# Heroku needs this a file, which only function is to
-# point at the actual file:
+# Heroku needs this file, which only function is to
+# point at the actual file location:
 -r requirements/staging.txt
 
 
