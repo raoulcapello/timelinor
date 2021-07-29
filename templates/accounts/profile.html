@@ -1,6 +1,12 @@
                 {% extends 'timelinor/base_main.html' %}
                 {% load static %}
 
+                {% block modal %}
+                <!-- User Profile Modals-->
+                {% include 'partials/_delete_profile_modal.html' %}
+                {% include 'partials/_reset_password_modal.html' %}
+                {% endblock modal %}
+
                 {% block content %}
                 <!-- Content-->
                 <div class="col-lg-8">
