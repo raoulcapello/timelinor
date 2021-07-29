@@ -1,7 +1,6 @@
                 {% extends 'timelinor/base_main.html' %}
                 {% load static %}
                 {% load crispy_forms_tags %}
-                {% load tz %}
 
                 {% block head %}
                 <!-- Vendor Styles-->
@@ -9,6 +8,11 @@
                 <link rel="stylesheet" media="screen" href="{% static 'libraries/flatpickr/dist/flatpickr.min.css' %}" />
                 {% endblock head %}
 
+                {% block modal %}
+                {% for form in formset %}
+                {% include 'partials/_delete_event_modal.html' %}
+                {% endfor %}
+                {% endblock modal %}
 
                 {% block content %}
                 <!-- Content-->
@@ -53,8 +57,6 @@
 
                     {% if formset %}
 
-                    {% if formset.initial_forms %}
-
                     <!-- Section: Edit Timeline Events -->
                     <div class="d-flex flex-column bg-light rounded-3 shadow-lg p-4 mb-3">
                         <div class="py-2 p-md-3">
@@ -82,7 +84,7 @@
                                         <!-- Accordion Header -->
                                         <h2 class="accordion-header" id="heading-{{ forloop.counter }}">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse-{{ forloop.counter }}">
-                                                {{ form.initial.title }}
+                                                {{ form.instance.title }}
                                             </button>
                                         </h2>
                                         <!-- Accordion Collapsable Body -->
@@ -91,6 +93,12 @@
                                                 {% csrf_token %}
                                                 <div class="p-4">
                                                     {% crispy form helper %}
+                                                </div>
+                                                <div class="d-flex flex-row-reverse">
+                                                    <a class="btn btn-link text-danger fw-medium btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#delete-event-modal-{{ forloop.counter }}">
+                                                        <i class="ai-trash-2 fs-base me-2"></i>
+                                                        Delete Event
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div> <!-- /.accordion-collapse -->
@@ -104,8 +112,6 @@
 
                         </div> <!-- /.col -->
                     </div> <!-- /.d-flex -->
-
-                    {% endif %}
 
                     {% endif %}
 
