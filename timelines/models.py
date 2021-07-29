@@ -25,9 +25,9 @@ class Timeline(models.Model):
 class TimelineEvent(models.Model):
     timeline = models.ForeignKey(Timeline, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    subtitle = models.CharField(max_length=100)
-    description = models.TextField(max_length=500)
-    date = models.DateTimeField()
+    subtitle = models.CharField(max_length=100, blank=True)
+    description = models.TextField(max_length=500, blank=True)
+    date = models.DateField()
 
     def __str__(self):
         return f'{self.title}: {self.subtitle} ({self.timeline})'
