@@ -2,6 +2,12 @@
                 {% load static %}
                 {% load crispy_forms_tags %}
 
+                {% block modal %}
+                {% for timeline in timelines %}
+                {% include 'partials/_delete_timeline_modal.html' %}
+                {% endfor %}
+                {% endblock modal %}
+
                 {% block content %}
                 <!-- Content-->
                 <div class="col-lg-8">
@@ -51,12 +57,18 @@
                                     <h5 class="card-title">{{ timeline.title }}</h5>
                                     <p class="card-text fs-sm">{{ timeline.description }}</p>
                                     <div class="row">
-                                        <div class="col-xs-3 g-3">
-                                            <a href="{% url 'timelines:view' timeline.id %}" class="btn btn-block btn-sm btn-primary">View Timeline</a>
-                                            <a href="{% url 'timelines:edit' timeline.id %}" class="btn btn-block btn-sm btn-warning">Edit Timeline</a>
+                                        <div class="col-sm-6 text-center text-sm-start">
+                                            <a href="{% url 'timelines:view' timeline.id %}" class="btn btn-block btn-sm btn-primary mb-1">View Timeline</a>
+                                            <a href="{% url 'timelines:edit' timeline.id %}" class="btn btn-block btn-sm btn-warning mb-1">Edit Timeline</a>
                                         </div>
-                                    </div>
-                                </div>
+                                        <div class="col-sm-6 text-center text-sm-end">
+                                            <a class="btn btn-link text-danger fw-medium btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#delete-timeline-modal-{{ forloop.counter }}">
+                                                <i class="ai-trash-2 fs-base me-2"></i>
+                                                Delete Timeline
+                                            </a>
+                                        </div>
+                                    </div> <!-- /.row -->
+                                </div> <!-- /.card-body -->
                             </div> <!-- /.card -->
 
                             {% empty %}

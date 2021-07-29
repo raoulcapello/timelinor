@@ -1,22 +1,24 @@
-                <!-- Warning Modal - Delete Profile -->
-                <div class="modal" id="delete-profile-modal" tabindex=" -1" role="dialog">
+                <!-- Warning Modal - Delete Timeline {{ forloop.counter }} -->
+                <div class="modal" id="delete-timeline-modal-{{ forloop.counter }}" tabindex=" -1" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">You're about to delete ALL your data!</h5>
+                                <h5 class="modal-title ">
+                                    You're about to delete the timeline named<br />
+                                    '{{ timeline.title }}'!
+                                </h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p class="fs-sm">All your profile data and your timeline graphs will be <b>permanently</b> deleted.</p>
-                                <p class="fs-sm"><b>Your data will NOT be recoverable in any way.</b></p>
-                                <p class="fs-sm">After deleting all your data, you will be logged out.</p>
+                                <p class="fs-sm">This includes <b>all events</b> in the timeline!</p>
+                                <p class="fs-sm">This action is <b>permanent</b>, data cannot be recovered.</p>
                                 <p class="fs-sm">Are you sure you want to do this?</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-info btn-sm" data-bs-dismiss="modal">On second thought, nah.</button>
-                                <form method="post" action="{% url 'delete-profile' %}">
+                                <form method="post" action="{% url 'timelines:delete_timeline' timeline.id %}">
                                     {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger btn-sm">Yes, delete ALL the things!</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">Yes, do it NAU!</button>
                                 </form>
                             </div>
                         </div>

@@ -115,3 +115,15 @@ def delete_event(request, id):
     messages.info(request, f'Success: Event {title} deleted.')
 
     return redirect('timelines:edit', id=timeline_id)
+
+
+def delete_timeline(request, id):
+    """
+    Takes timeline id as a second argument.
+    """
+    timeline = get_object_or_404(Timeline, id=id)
+    title = timeline.title
+    timeline.delete()
+    messages.info(request, f'Success: Timeline {title} deleted.')
+
+    return redirect('timelines:list')
