@@ -19,12 +19,19 @@
                         <div class="d-lg-block collapse pb-2" id="account-menu">
                             <h3 class="d-block bg-secondary fs-sm fw-semibold text-muted mb-0 px-4 py-3">Dashboard</h3>
                             <a class="d-flex align-items-center nav-link-style px-4 py-3" href="{% url 'timelines:list' %}">
-                                <i class="ai-fast-forward fs-lg opacity-60 me-2"></i>
+                                <i class="ai-play fs-lg opacity-60 me-2"></i>
                                 My Timelines
                                 <span class="text-muted fs-sm fw-normal ms-auto">{{ timelines.count }}</span>
                             </a>
+                            {% if timeline %}
+                            <a class="d-flex align-items-center nav-link-style px-4 py-3" href="{% url 'timelines:edit' timeline.id %}">
+                                <i class="ai-fast-forward fs-lg opacity-60 me-2"></i>
+                                {{ timeline.title }}
+                            </a>
+                            {% endif %}
                             <h3 class="d-block bg-secondary fs-sm fw-semibold text-muted mb-0 px-4 py-3">Account settings</h3>
                             <a class="d-flex align-items-center nav-link-style px-4 py-3" href="{% url 'profile' %}">
+                                <i class="ai-user fs-lg opacity-60 me-2"></i>
                                 Profile info
                             </a>
                             <a class="d-flex align-items-center nav-link-style px-4 py-3 border-top" href="{% url 'logout' %}">
