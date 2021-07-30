@@ -1,4 +1,4 @@
-/******************* Timeline Demo *****************/
+/******************* Timeline Graph Style *****************/
 
 .main-timeline p {
   margin-bottom: 3rem;
@@ -106,6 +106,7 @@
   text-align: right;
   position: relative;
   z-index: 1;
+  min-height: 250px;
 }
 .main-timeline .timeline-content:after,
 .main-timeline .timeline-content:before {
