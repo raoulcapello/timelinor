@@ -18,7 +18,38 @@
                 <!-- Content-->
                 <div class="col-lg-8">
 
-                    {% if new_event_form %}
+                    <!-- Section: Edit Timeline Details-->
+                    <div class="d-flex flex-column bg-light rounded-3 shadow-lg p-4 mb-3">
+                        <div class="py-2 p-md-3">
+
+                            <!-- Widget Title + Create Event button-->
+                            <div class="d-sm-flex align-items-center justify-content-between pb-2 text-center text-sm-start">
+                                <h1 class="h3 mb-3 text-nowrap">{{ timeline.title }}</h1>
+                                <div class="mb-3">
+                                    <a class="btn btn-translucent-primary" href="#edit-details" data-bs-toggle="collapse">
+                                        <i class="ai-plus me-2"></i>Edit Details</a>
+                                </div>
+                            </div>
+
+                            <!-- Edit Details form-->
+                            <div class="collapse {% if timeline_details_form.errors %} show{% endif %}" id="edit-details">
+
+                                <form method="post" action="{% url 'timelines:edit' timeline.id %}" class="needs-validation shadow rounded mb-4" novalidate>
+                                    {% csrf_token %}
+                                    <div class="d-flex align-items-center justify-content-between bg-dark rounded-top py-3 px-4">
+                                        <h3 class="fs-base text-light mb-0">Update details</h3>
+                                        <a class="btn-close btn-close-white" href="#medit-details" data-bs-toggle="collapse"></a>
+                                    </div>
+                                    <div class="p-4">
+                                        {% crispy timeline_details_form %}
+                                        <button class="btn btn-primary mt-3" type="submit" name="update-timeline-details">Edit Timeline Details</button>
+                                    </div>
+                                </form>
+
+                            </div> <!-- /.collapse -->
+
+                        </div> <!-- /.py-2 -->
+                    </div> <!-- /.d-flex -->
 
                     <!-- Section: New Timeline Event-->
                     <div class="d-flex flex-column bg-light rounded-3 shadow-lg p-4 mb-3">
@@ -26,7 +57,7 @@
 
                             <!-- Widget Title + Create Event button-->
                             <div class="d-sm-flex align-items-center justify-content-between pb-2 text-center text-sm-start">
-                                <h1 class="h3 mb-3 text-nowrap">{{ timeline.title }}</h1>
+                                <h1 class="h3 mb-3 text-nowrap">New Event</h1>
                                 <div class="mb-3">
                                     <a class="btn btn-translucent-primary" href="#message-compose" data-bs-toggle="collapse">
                                         <i class="ai-plus me-2"></i>Add New Event</a>
@@ -53,10 +84,6 @@
                         </div> <!-- /.py-2 -->
                     </div> <!-- /.d-flex -->
 
-                    {% endif %}
-
-                    {% if formset %}
-
                     <!-- Section: Edit Timeline Events -->
                     <div class="d-flex flex-column bg-light rounded-3 shadow-lg p-4 mb-3">
                         <div class="py-2 p-md-3">
@@ -64,7 +91,7 @@
                             <form method="post" action="{% url 'timelines:edit' timeline.id %}" class="needs-validation" novalidate>
 
                                 <!-- Widget Title-->
-                                <h1 class="h3 mb-3 text-nowrap">Edit Timeline Events </h1>
+                                <h1 class="h3 mb-3 text-nowrap">Saved Events </h1>
 
                                 <!-- Update Events button -->
                                 <div class="d-flex flex-row-reverse">
@@ -112,8 +139,6 @@
 
                         </div> <!-- /.col -->
                     </div> <!-- /.d-flex -->
-
-                    {% endif %}
 
                 </div>
                 {% endblock content %}

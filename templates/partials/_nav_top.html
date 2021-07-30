@@ -3,7 +3,13 @@
         {% url 'profile' as profile_url %}
         {% url 'timelines:list' as timeline_list_url %}
         {% url 'timelines:edit' timeline.id as timeline_edit_url %}
+        {% url 'timelines:public' timeline.slug as timeline_public_url %}
+
+        {% if request.path == timeline_public_url and not request.user.is_authenticated %}
+        {% comment %} Don't display navbar on public Timeline URL to unauthenticated users. {% endcomment %}
+        {% else %}
         {% if request.path != home_url and request.path != profile_url and request.path != timeline_list_url and request.path != timeline_edit_url %}
+        {% comment %} Display a light navbar on certain pages. {% endcomment %}
         <header class="header navbar navbar-expand-lg navbar-light navbar-floating navbar-sticky" data-scroll-header data-fixed-element>
             {% else %}
             <header class="header navbar navbar-expand-lg navbar-dark navbar-floating navbar-sticky" data-scroll-header data-fixed-element>
@@ -18,6 +24,7 @@
                     </a>
                     <div class="d-flex align-items-center order-lg-3 ms-lg-auto">
                         {% if not request.user.is_authenticated %}
+                        {% comment %} Display Sign In/Sign Up modals to unauthenticated users. {% endcomment %}
                         <a class="nav-link-style fs-sm text-nowrap" href="#modal-signin" data-bs-toggle="modal" data-view="#modal-signin-view">
                             <i class="ai-user fs-xl me-2 align-middle"></i>Sign in
                         </a>
@@ -25,6 +32,7 @@
                             Sign up
                         </a>
                         {% else %}
+                        {% comment %} Display a user's avatar and a dropdown menu to authenticated users. {% endcomment %}
                         <div class="navbar-tool dropdown">
                             <a class="navbar-tool-icon-box" href="{% url 'profile' %}">
                                 {% if request.user.image %}
@@ -55,6 +63,7 @@
                             <!-- Menu-->
                             <ul class="navbar-nav">
                                 {% if request.user.is_authenticated %}
+                                {% comment %} Display a menu with personal options to authenticated users. {% endcomment %}
                                 <li class="nav-item dropdown dropdown-mega">
                                     <a class="nav-link dropdown-toggle" href="{% url 'timelines:list' %}" data-bs-toggle="dropdown">My Timelinor</a>
                                     <div class="dropdown-menu">
@@ -75,3 +84,4 @@
                     </div>
                 </div>
             </header>
+            {% endif %}

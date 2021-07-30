@@ -13,4 +13,5 @@ urlpatterns = [
         views.delete_timeline,
         name='delete_timeline',
     ),
+    path('public/<str:slug>/', views.public_timeline_url, name='public'),
 ]

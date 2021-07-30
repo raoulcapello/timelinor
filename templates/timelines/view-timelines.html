@@ -52,16 +52,16 @@
                             {% for timeline in timelines %}
 
                             <!-- Timelines -->
-                            <div class="card mb-3">
+                            <div class="card card-hover mb-3">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ timeline.title }}</h5>
                                     <p class="card-text fs-sm">{{ timeline.description }}</p>
-                                    <div class="row">
-                                        <div class="col-sm-6 text-center text-sm-start">
-                                            <a href="{% url 'timelines:view' timeline.id %}" class="btn btn-block btn-sm btn-primary mb-1">View Timeline</a>
+                                    <div class="row text-center">
+                                        <div class="col-sm-6 text-sm-start">
+                                            <a href="{% url 'timelines:public' timeline.slug %}" class="btn btn-block btn-sm btn-primary mb-1">View Timeline</a>
                                             <a href="{% url 'timelines:edit' timeline.id %}" class="btn btn-block btn-sm btn-warning mb-1">Edit Timeline</a>
                                         </div>
-                                        <div class="col-sm-6 text-center text-sm-end">
+                                        <div class="col-sm-6 text-sm-end">
                                             <a class="btn btn-link text-danger fw-medium btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#delete-timeline-modal-{{ forloop.counter }}">
                                                 <i class="ai-trash-2 fs-base me-2"></i>
                                                 Delete Timeline

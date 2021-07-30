@@ -1,4 +1,10 @@
     {% load static %}
+
+    {% url 'timelines:public' timeline.slug as timeline_public_url %}
+
+    {% if request.path == timeline_public_url and not request.user.is_authenticated %}
+    {% comment %} Don't display a footer on public Timeline URL to unauthenticated users. {% endcomment %}
+    {% else %}
     <footer class="footer bg-dark pt-5 pt-md-6">
         <div class="container pt-3 pt-md-0">
             <div class="row pb-3">
@@ -29,3 +35,4 @@
             </div>
         </div>
     </footer>
+    {% endif %}

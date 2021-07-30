@@ -61,6 +61,7 @@ class TimelineModelForm(forms.ModelForm):
         fields = [
             'title',
             'description',
+            'slug',
         ]
 
     title = forms.CharField(
@@ -77,6 +78,19 @@ class TimelineModelForm(forms.ModelForm):
                 'rows': 5,
             }
         )
+    )
+    slug = forms.SlugField(
+        required=False,
+        label=(
+            'The slug is used to provide you with a custom public URL to your \
+                timeline graph, so you can share it with the world. If you \
+                    don\'t provide one, it will be automatically generated.'
+        ),
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'i.e. \'my-first-slug\'',
+            }
+        ),
     )
 
 
