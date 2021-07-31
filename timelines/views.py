@@ -55,14 +55,19 @@ def edit_timeline(request, id):
     Additionally, render a formset with a form for each existing
     timeline event, populating each form with current data.
     """
+    # Get timeline and its events
     timeline = get_object_or_404(Timeline, id=id)
     events = TimelineEvent.objects.filter(timeline__id=id).order_by('-date')
+    # Initialize forms
+    timeline_details_form = TimelineModelForm(instance=timeline)
+    new_event_form = TimelineEventModelForm()
+    update_events_formset = EventFormSet(queryset=events)
+
+    # Handle POST request scenarios
     if request.method == 'POST':
+        # Timeline details form
         if 'update-timeline-details' in request.POST:
-            # Update timeline details
-            timeline_details_form = TimelineModelForm(request.POST)  # Populate
-            new_event_form = TimelineEventModelForm()  # Empty form
-            formset = EventFormSet(queryset=events)  # Empty form
+            timeline_details_form = TimelineModelForm(request.POST)
             if timeline_details_form.is_valid():
                 timeline = timeline_details_form.save(commit=False)
                 timeline.user = request.user
@@ -71,14 +76,10 @@ def edit_timeline(request, id):
                 messages.success(request, 'Timeline details updated!')
             else:
                 # Form was invalid
-                messages.error(request, 'Could not update Timeline details.')
+                messages.error(request, 'Could not update timeline details.')
+        # New event form
         elif 'add-event' in request.POST:
-            # 'New Event' form was submitted
-            timeline_details_form = TimelineModelForm(
-                instance=timeline
-            )  # Empty form
-            new_event_form = TimelineEventModelForm(request.POST)  # Populate
-            formset = EventFormSet(queryset=events)  # Empty form
+            new_event_form = TimelineEventModelForm(request.POST)
             if new_event_form.is_valid():
                 event = new_event_form.save(commit=False)
                 event.timeline = timeline
@@ -87,15 +88,11 @@ def edit_timeline(request, id):
             else:
                 # Form was invalid
                 messages.error(request, 'Something went wrong.')
+        # Update event(s) form
         else:
-            # 'Update Events' formset was submitted
-            timeline_details_form = TimelineModelForm(
-                instance=timeline
-            )  # Empty form
-            new_event_form = TimelineEventModelForm()  # Empty form
-            formset = EventFormSet(request.POST, queryset=events)  # Populate
-            if formset.is_valid():
-                formset.save()
+            update_events_formset = EventFormSet(request.POST, queryset=events)
+            if update_events_formset.is_valid():
+                update_events_formset.save()
                 messages.success(request, 'Events updated!')
             else:
                 # Formset invalid
@@ -103,13 +100,7 @@ def edit_timeline(request, id):
                     request, 'Something went wrong updating the event(s).'
                 )
 
-    else:
-        # GET request
-        timeline_details_form = TimelineModelForm(instance=timeline)
-        new_event_form = TimelineEventModelForm()
-        formset = EventFormSet(queryset=events)
-
-    helper = EventFormSetHelper()
+    formset_helper = EventFormSetHelper()
 
     return render(
         request,
@@ -118,8 +109,8 @@ def edit_timeline(request, id):
             'timeline': timeline,
             'timeline_details_form': timeline_details_form,
             'new_event_form': new_event_form,
-            'formset': formset,
-            'helper': helper,
+            'update_events_formset': update_events_formset,
+            'formset_helper': formset_helper,
         },
     )
 

@@ -9,7 +9,7 @@
                 {% endblock head %}
 
                 {% block modal %}
-                {% for form in formset %}
+                {% for form in update_events_formset %}
                 {% include 'partials/_delete_event_modal.html' %}
                 {% endfor %}
                 {% endblock modal %}
@@ -102,9 +102,9 @@
                                 <div class="accordion" id="eventAccordion">
 
 
-                                    {{ formset.management_form|crispy }}
+                                    {{ update_events_formset.management_form|crispy }}
 
-                                    {% for form in formset %}
+                                    {% for form in update_events_formset %}
 
                                     <!-- Accordion Item -->
                                     <div class="accordion-item">
@@ -119,7 +119,7 @@
                                             <div class="accordion-body">
                                                 {% csrf_token %}
                                                 <div class="p-4">
-                                                    {% crispy form helper %}
+                                                    {% crispy form formset_helper %}
                                                 </div>
                                                 <div class="d-flex flex-row-reverse">
                                                     <a class="btn btn-link text-danger fw-medium btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#delete-event-modal-{{ forloop.counter }}">
