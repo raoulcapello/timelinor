@@ -24,7 +24,7 @@
                             </div>
 
                             <!-- Create Event form-->
-                            <div class="collapse" id="message-compose">
+                            <div class="collapse{% if form.errors %} show{% endif %}" id="message-compose">
 
                                 <form method="post" action="{% url 'timelines:list' %}" class="needs-validation shadow rounded mb-4" novalidate>
                                     {% csrf_token %}

@@ -29,6 +29,9 @@ def timeline_view(request, id):
 
 @login_required
 def timeline_list_view(request):
+    # Initialize form
+    form = TimelineModelForm()
+
     if request.method == 'POST':
         form = TimelineModelForm(request.POST)
         if form.is_valid():
@@ -38,8 +41,9 @@ def timeline_list_view(request):
             messages.success(request, 'Timeline saved.')
         else:
             messages.error(request, 'Something went wrong.')
+
     timelines = Timeline.objects.filter(user=request.user).order_by('title')
-    form = TimelineModelForm()
+
     return render(
         request,
         'timelines/view-timelines.html',
@@ -50,18 +54,25 @@ def timeline_list_view(request):
 @login_required
 def edit_timeline(request, id):
     """
-    Render a form for adding a new timeline event.
+    Renders a:
 
-    Additionally, render a formset with a form for each existing
-    timeline event, populating each form with current data.
+    1) Form for adding a new timeline.
+
+    2) Form for adding a new timeline event.
+
+    3) Formset for previously created timeline events, rendering a form per
+       event, populating each form with current data.
     """
+
     # Get timeline and its events
     timeline = get_object_or_404(Timeline, id=id)
     events = TimelineEvent.objects.filter(timeline__id=id).order_by('-date')
+
     # Initialize forms
     timeline_details_form = TimelineModelForm(instance=timeline)
     new_event_form = TimelineEventModelForm()
     update_events_formset = EventFormSet(queryset=events)
+    formset_helper = EventFormSetHelper()
 
     # Handle POST request scenarios
     if request.method == 'POST':
@@ -99,8 +110,6 @@ def edit_timeline(request, id):
                 messages.error(
                     request, 'Something went wrong updating the event(s).'
                 )
-
-    formset_helper = EventFormSetHelper()
 
     return render(
         request,
