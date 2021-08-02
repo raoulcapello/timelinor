@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import modelformset_factory
 from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, HTML, Div
 
 from .models import Timeline, TimelineEvent
 
@@ -51,18 +52,59 @@ class EventFormSetHelper(FormHelper):
 
 
 class TimelineModelForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.label_class = 'form-label'
-
     class Meta:
         model = Timeline
         fields = [
             'title',
             'description',
             'slug',
+            'button',
+            'button_text',
+            'button_url',
         ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.label_class = 'form-label'
+        self.helper.layout = Layout(
+            Fieldset(
+                '',
+                'title',
+                'description',
+                'slug',
+                Div(
+                    HTML(
+                        (
+                            'The \'slug\' is used to provide you with a custom \
+                            public URL to your timeline graph, so you can \
+                            share it with the world. If you don\'t provide \
+                            one, it will be automatically generated.'
+                        ),
+                    ),
+                    css_class='form-text',
+                ),
+            ),
+            Fieldset(
+                '<hr class="my-5">(Optional) Custom Homepage Button Settings',
+                Div(
+                    'button',
+                    css_class='form-check form-switch',
+                ),
+                Div(
+                    HTML(
+                        (
+                            'Activates an optional button on the public \
+                            timeline page. This allows you to redirect \
+                            your users back to  your own domain.'
+                        ),
+                    ),
+                    css_class='form-text mb-3',
+                ),
+                'button_text',
+                'button_url',
+            ),
+        )
 
     title = forms.CharField(
         widget=forms.TextInput(
@@ -81,15 +123,31 @@ class TimelineModelForm(forms.ModelForm):
     )
     slug = forms.SlugField(
         required=False,
-        label=(
-            'The slug is used to provide you with a custom public URL to your \
-                timeline graph, so you can share it with the world. If you \
-                    don\'t provide one, it will be automatically generated.'
-        ),
         widget=forms.TextInput(
             attrs={
                 'placeholder': 'i.e. \'my-first-slug\'',
             }
+        ),
+    )
+    button = forms.BooleanField(
+        required=False,
+        label=('Show button on public page'),
+        widget=forms.CheckboxInput(
+            attrs={
+                'class': 'form-check-input',
+            }
+        ),
+    )
+    button_text = forms.CharField(
+        required=False,
+        widget=forms.TextInput(
+            attrs={'placeholder': 'i.e. Back to my homepage'}
+        ),
+    )
+    button_url = forms.URLField(
+        required=False,
+        widget=forms.URLInput(
+            attrs={'placeholder': 'i.e. www.your-domain.com'}
         ),
     )
 

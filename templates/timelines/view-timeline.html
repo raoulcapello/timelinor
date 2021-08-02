@@ -11,7 +11,46 @@
 
                 <!-- Project title-->
                 <section class="container">
-                    <h1 class="h2">{{ timeline.title }}</h1>
+                    <div class="row">
+
+                        <div class="col-9">
+                            <h1 class="h2">{{ timeline.title }}</h1>
+
+                            <!-- Home icon -->
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">
+                                        {% if timeline.button %}
+                                        <a href="{{ timeline.button_url }}">
+                                            <i class="ai-home"></i>
+                                            {{ timeline.button_text }}
+                                        </a>
+                                        {% else %}
+                                        <a href="#">
+                                            <i class="ai-home"></i>
+                                            Home
+                                        </a>
+                                        {% endif %}
+                                    </li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ timeline.title }}</li>
+                                </ol>
+                            </nav>
+
+                        </div> <!-- /.col -->
+
+                        <div class="col-3 d-flex justify-content-end">
+                            {% if timeline.button %}
+                            <!-- Primary outline button -->
+                            <a href="{{ timeline.button_url }}">
+                                <button type="button" class="btn btn-primary">
+                                    <i class="ai-home me-2"></i>
+                                    {{ timeline.button_text }}
+                                </button>
+                            </a>
+                            {% endif %}
+                        </div> <!-- /.col -->
+
+                    </div> <!-- /.row -->
                 </section>
 
                 <div class="container">

@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 
 import string
 import random
@@ -19,6 +20,9 @@ class Timeline(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=500)
     slug = models.SlugField(max_length=100, unique=True, null=True)
+    button = models.BooleanField(default=False)
+    button_text = models.CharField(max_length=50, default='Back')
+    button_url = models.URLField(default='', blank=True)
 
     # Based on:
     # https://kodnito.com/posts/slugify-urls-django/
