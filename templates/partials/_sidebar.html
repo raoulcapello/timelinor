@@ -1,4 +1,6 @@
                 {% load static %}
+                {% url 'timelines:list' as timeline_list_url %}
+                {% url 'profile' as profile_url %}
                 <div class="col-lg-4 mb-4 mb-lg-0">
                     <div class="bg-light rounded-3 shadow-lg">
                         <div class="px-4 py-4 mb-1 text-center">
@@ -18,19 +20,24 @@
                         </div>
                         <div class="d-lg-block collapse pb-2" id="account-menu">
                             <h3 class="d-block bg-secondary fs-sm fw-semibold text-muted mb-0 px-4 py-3">Timeline settings</h3>
-                            <a class="d-flex align-items-center nav-link-style px-4 py-3" href="{% url 'timelines:list' %}">
-                                <i class="ai-play fs-lg opacity-60 me-2"></i>
+                            <a class="d-flex align-items-center nav-link-style px-4 py-3{% if request.path == timeline_list_url %} active{% endif %}" href="{% url 'timelines:list' %}">
+                                <i class="ai-fast-forward fs-lg opacity-60 me-2"></i>
                                 My Timelines
-                                <span class="text-muted fs-sm fw-normal ms-auto">{{ timelines.count }}</span>
+                                <span class="text-muted fs-sm fw-normal ms-auto">{{ request.session.timeline_count }}</span>
                             </a>
                             {% if timeline %}
-                            <a class="d-flex align-items-center nav-link-style px-4 py-3" href="{% url 'timelines:edit' timeline.id %}">
-                                <i class="ai-fast-forward fs-lg opacity-60 me-2"></i>
-                                {{ timeline.title }}
+                            <h3 class="d-block bg-secondary fs-sm fw-semibold text-muted mb-0 px-4 py-3">{{ timeline.title }}</h3>
+                            <a class="d-flex align-items-center nav-link-style px-5 py-3 active" href="{% url 'timelines:edit' timeline.id %}">
+                                <i class="ai-edit fs-lg opacity-60 me-2"></i>
+                                Edit
+                            </a>
+                            <a class="d-flex align-items-center nav-link-style px-5 py-3" href="{% url 'timelines:view' timeline.id %}">
+                                <i class="ai-eye fs-lg opacity-60 me-2"></i>
+                                View
                             </a>
                             {% endif %}
                             <h3 class="d-block bg-secondary fs-sm fw-semibold text-muted mb-0 px-4 py-3">Account settings</h3>
-                            <a class="d-flex align-items-center nav-link-style px-4 py-3" href="{% url 'profile' %}">
+                            <a class="d-flex align-items-center nav-link-style px-4 py-3{% if request.path == profile_url %} active{% endif %}" href="{% url 'profile' %}">
                                 <i class="ai-user fs-lg opacity-60 me-2"></i>
                                 Profile info
                             </a>

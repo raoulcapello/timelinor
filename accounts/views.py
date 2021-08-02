@@ -11,6 +11,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 
+from timelines.models import Timeline
 from .forms import (
     RegisterUserForm,
     UserProfileModelForm,
@@ -208,6 +209,12 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
+
+            # Fetch timeline count for display in the sidebar menu
+            request.session['timeline_count'] = Timeline.objects.filter(
+                user=request.user
+            ).count()
+
             return redirect('profile')
 
         messages.error(request, 'Invalid credentials, please try again.')

@@ -38,6 +38,9 @@ def timeline_list_view(request):
             timeline = form.save(commit=False)
             timeline.user = request.user
             timeline.save()
+            request.session['timeline_count'] = Timeline.objects.filter(
+                user=request.user
+            ).count()  # Update sidebar menu counter
             messages.success(request, 'Timeline saved.')
         else:
             messages.error(request, 'Something went wrong.')
@@ -84,6 +87,12 @@ def edit_timeline(request, id):
             if timeline_details_form.is_valid():
                 timeline_details_form.save()
                 messages.success(request, 'Timeline details updated!')
+                # Re-render form (just and only) in case an empty slug
+                # was provided:
+                # This would result in an auto-generated slug (see
+                # model), in which case the slug field now needs to be
+                # repopulated by fetching the object from the database
+                timeline_details_form = TimelineModelForm(instance=timeline)
             else:
                 # Form was invalid
                 messages.error(request, 'Could not update timeline details.')
@@ -132,7 +141,7 @@ def delete_event(request, id):
     title = event.title
     timeline_id = event.timeline_id
     event.delete()
-    messages.info(request, f'Success: Event {title} deleted.')
+    messages.info(request, f'Event \'{title}\' deleted.')
 
     return redirect('timelines:edit', id=timeline_id)
 
@@ -145,7 +154,10 @@ def delete_timeline(request, id):
     timeline = get_object_or_404(Timeline, id=id)
     title = timeline.title
     timeline.delete()
-    messages.info(request, f'Success: Timeline {title} deleted.')
+    request.session['timeline_count'] = Timeline.objects.filter(
+        user=request.user
+    ).count()  # Update sidebar menu counter
+    messages.info(request, f'Timeline \'{title}\' deleted.')
 
     return redirect('timelines:list')
 
