@@ -78,12 +78,11 @@ def edit_timeline(request, id):
     if request.method == 'POST':
         # Timeline details form
         if 'update-timeline-details' in request.POST:
-            timeline_details_form = TimelineModelForm(request.POST)
+            timeline_details_form = TimelineModelForm(
+                request.POST, instance=timeline
+            )
             if timeline_details_form.is_valid():
-                timeline = timeline_details_form.save(commit=False)
-                timeline.user = request.user
-                timeline.id = id
-                timeline.save()
+                timeline_details_form.save()
                 messages.success(request, 'Timeline details updated!')
             else:
                 # Form was invalid
