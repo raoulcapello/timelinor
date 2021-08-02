@@ -13,6 +13,9 @@
                         {% if message.tags == 'danger' %}
                         <i class="ai-x-circle fs-xl me-3"></i>
                         {% endif %}
+                        {% if message.tags == 'info' %}
+                        <i class="ai-alert-circle fs-xl me-3"></i>
+                        {% endif %}
                         {{ message }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
