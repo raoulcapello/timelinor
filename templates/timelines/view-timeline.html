@@ -16,6 +16,7 @@
                         <div class="col-9">
                             <h1 class="h2">{{ timeline.title }}</h1>
 
+                            {% if request.user.is_authenticated %}
                             <!-- Home icon -->
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -35,6 +36,7 @@
                                     <li class="breadcrumb-item active" aria-current="page">{{ timeline.title }}</li>
                                 </ol>
                             </nav>
+                            {% endif %}
 
                         </div> <!-- /.col -->
 
