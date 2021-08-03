@@ -1,6 +1,8 @@
 # Timelinor
 Create your own timeline graphs 'as-a-webpage', with Timelinor!
 
+You can find it [here](https://timelinor.herokuapp.com/)!
+
 ### Video demo: https://youtu.be/bM8lZVx4Lnk
 ### Description
 
