@@ -73,22 +73,52 @@ class RegisterUserForm(UserCreationForm):
         ]
 
     username = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': 'Username'})
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Username',
+                'autocomplete': 'off',
+            }
+        )
     )
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={'placeholder': 'Email'}),
+        widget=forms.EmailInput(
+            attrs={
+                'placeholder': 'Email',
+                'autocomplete': 'off',
+            }
+        ),
     )
     first_name = forms.CharField(
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'First Name'}),
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'First Name',
+                'autocomplete': 'off',
+            }
+        ),
     )
     last_name = forms.CharField(
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'Last Name'}),
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Last Name',
+                'autocomplete': 'off',
+            }
+        ),
     )
     password1 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'placeholder': 'Password'}),
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': 'Password',
+                'autocomplete': 'off',
+            }
+        ),
     )
     password2 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'placeholder': 'Confirm password'}),
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': 'Confirm password',
+                'autocomplete': 'off',
+            }
+        ),
     )
