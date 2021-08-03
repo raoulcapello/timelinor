@@ -27,6 +27,9 @@
                                 {{ password_reset_form.non_field_errors }}
                                 <div class="bg-secondary rounded-3 p-4 mb-4">
                                     <div class="d-block d-sm-flex align-items-center">
+                                        <!-- Default user avatar icon by  Becris -->
+                                        <!-- https://creativemarket.com/Becris -->
+                                        <!-- From www.flaticon.com -->
                                         {% if request.user.image %}
                                         <img class="d-block rounded-circle mx-sm-0 mx-auto mb-3 mb-sm-0" src="{{ request.user.image.url|default_if_none:"/static/img/avatar.svg" }}" alt="{{ request.user.first_name }} {{ request.user.last_name }}" width="110">
                                         {% else %}
