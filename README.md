@@ -7,6 +7,13 @@ You can find it [here](https://timelinor.herokuapp.com/) (registration is free)!
 
 ![Screenshot](/frontend/static/img/showcase-readme-md.png)
 
+## Table of Contents
+* [Description](#description)
+* [Technical Features](#technical-features)
+* [Deployment](#deployment)
+* [Installation](#installation)
+* [Important notes](#important-notes)
+
 ### Description
 
 I built this web application as part of [the final assignment of Harvard’s CS50 programming course](https://cs50.harvard.edu/x/2021/project/).
