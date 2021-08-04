@@ -60,22 +60,22 @@ I had several aims with this project:
 
 ### Any environment (local/dev, staging, and production)
 Required environment variables in any environment (local/dev, staging, and production), that should never be part of the codebase for security reasons:
-* SECRET_KEY (Django uses this to secure the application, never share this key!)
-* DEBUG (Security warning: always set this to False in public environments)
-* ALLOWED_HOSTS (This apps domain name - you can add multiple host names separated by comma's)
-* AWS_ACCESS_KEY_ID (Amazon S3 storage backend)
-* AWS_SECRET_ACCESS_KEY (Amazon S3 storage backend)
-* EMAIL_HOST (SMTP server)
-* EMAIL_HOST_USER (SMTP username)
-* EMAIL_HOST_PASSWORD (SMTP password)
-* DEFAULT_FROM_EMAIL (Default 'from' email)
+* `SECRET_KEY` (Django uses this to secure the application, never share this key!)
+* `DEBUG` (Security warning: always set this to False in public environments)
+* `ALLOWED_HOSTS` (This apps domain name - you can add multiple host names separated by comma's)
+* `AWS_ACCESS_KEY_ID` (Amazon S3 storage backend)
+* `AWS_SECRET_ACCESS_KEY` (Amazon S3 storage backend)
+* `EMAIL_HOST` (SMTP server)
+* `EMAIL_HOST_USER` (SMTP username)
+* `EMAIL_HOST_PASSWORD` (SMTP password)
+* `DEFAULT_FROM_EMAIL` (Default 'from' email)
 
 ### Local
 
 Additional required environment variables for the Postgres Docker container in your local/dev environment:
-* PG_NAME (Postgres database name)
-* PG_USER (Postgres username, has to be the same as PG_NAME otherwise Docker container won't be accessible)
-* PG_PASSWORD (Postgres database password)
+* `PG_NAME` (Postgres database name)
+* `PG_USER` (Postgres username, has to be the same as PG_NAME otherwise Docker container won't be accessible)
+* `PG_PASSWORD` (Postgres database password)
 
 ### Staging and production
 Additional required environment variables for staging and production:
