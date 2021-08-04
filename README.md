@@ -27,8 +27,8 @@ I had several aims with this project:
 
 ### Video demo: https://youtu.be/bM8lZVx4Lnk (3 minutes)
 # Technical Features
-
-* Tech stack:
+## Tech stack
+* Mainly:
     * [Python 3](https://www.python.org/)
     * [Django 3](https://www.djangoproject.com/)
     * [Bootstrap 5](https://getbootstrap.com/)
@@ -51,15 +51,23 @@ I had several aims with this project:
     * [Django Storages](https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html) (in combination with Amazon S3 buckets, for static file serving)
 * Notable Python library used:
     * [Black](https://github.com/psf/black), the uncompromising code formatter
-* CI/CD
-    * Local development:
-        * Django's development server
-        * Docker Postgres container (`docker-compose.yml` and sample `.env` file included in `docker` folder in project root)
-    * Staging and production:
-        * After developing locally, code base can easily be pushed to a [Heroku](https://www.heroku.com/) pipeline, consisting of both a staging and a production environment
-        * Required Heroku config files (`Procfile`, `runtime.txt`, and `requirements.txt`) are part of this code base
-    * [Environment variables](#set-environment-variables) are used in every environment for sensitive data like database credentials, AWS, mail server, etc.
-        * Separate Postgres databases can be configured using said environment variables
+* Notable JavaScript libraries used:
+    * [flatpickr](https://flatpickr.js.org/), datetime picker
+    * [Jarallax](http://www.jarallax.com/), web-based parallax scrolling
+
+## CI/CD
+
+### Local development
+* Django's development server
+* Docker Postgres container (`docker-compose.yml` and sample `.env` file included in `docker` folder in project root)
+### Staging and production
+* After developing locally, code base can easily be pushed to a [Heroku](https://www.heroku.com/) pipeline, consisting of both a staging and a production environment
+* Required Heroku config files (`Procfile`, `runtime.txt`, and `requirements.txt`) are part of this code base
+
+### Environement variables
+
+* [Environment variables](#set-environment-variables) are used in every environment for sensitive data like database credentials, AWS, mail server, etc.
+    * Separate Postgres databases can be configured using said environment variables
 
 # Deployment
 
