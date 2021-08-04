@@ -11,7 +11,6 @@ You can find it [here](https://timelinor.herokuapp.com/) (registration is free)!
 * [Description](#description)
 * [Technical Features](#technical-features)
 * [Deployment](#deployment)
-* [Installation](#installation)
 * [Important notes](#important-notes)
 
 ### Description
@@ -58,7 +57,7 @@ I had several aims with this project:
 ## CI/CD
 
 ### Local development
-* Django's development server
+* Use Django's development server
 * Docker Postgres container (`docker-compose.yml` and sample `.env` file included in `docker` folder in project root)
 ### Staging and production
 * After developing locally, code base can easily be pushed to a [Heroku](https://www.heroku.com/) pipeline, consisting of both a staging and a production environment
@@ -98,7 +97,7 @@ Additional required environment variables for staging and production:
 
 See the various settings files in the `settings` folder for further details.
 
-## Installation
+## Install and deploy
 
 ### Local
 
@@ -112,15 +111,34 @@ See the various settings files in the `settings` folder for further details.
     `pip install -r requirements/local.txt`
 * Note there are multiple settings files (in the `settings` folder), and that the `DJANGO_SETTINGS_MODULE` variable in both `manage.py` and `wsgi.py` are set to `timelinor.settings.local` by default
 
-### Staging and Production via Heroku
+### Staging and Production
+
+#### Via Heroku
 
 See the docs:
 * [Heroku Docs - Django deployment](https://devcenter.heroku.com/articles/django-app-configuration)
 * [Video explaining the basics](https://www.youtube.com/watch?v=1923eduj0Gg)
 
+Note that:
+* Packages are automatically installed (via `requirements.txt` in the project root folder)
+* Migrations are automatically applied (via the `Procfile`)
+* Python version is configured via `runtime.txt`
+
+Deploy to heroku with:
+
+`git push heroku main:main`
+
+Consider using a Heroku pipeline, with a separate staging and production app. After deploying the staging app, it can then be promoted with:
+
+`heroku pipelines:promote -a timelinor-staging` 
+
+(Assuming the staging app is called `timelinor-staging`.)
+
+#### In general (not using Heroku)
+
 * Install required packages with:
 
-    `pip install -r requirements/local.txt`
+    `pip install -r requirements/staging.txt`
 
 # Important notes
 
