@@ -13,7 +13,7 @@
                 <section class="container">
                     <div class="row">
 
-                        <div class="col-9">
+                        <div class="col-md-9">
                             <h1 class="h2">{{ timeline.title }}</h1>
 
                             {% if request.user.is_authenticated %}
@@ -40,7 +40,7 @@
 
                         </div> <!-- /.col -->
 
-                        <div class="col-3 d-flex justify-content-end">
+                        <div class="col-md-3 d-flex justify-content-end">
                             {% if timeline.button %}
                             <!-- Primary outline button -->
                             <a href="{{ timeline.button_url }}">
