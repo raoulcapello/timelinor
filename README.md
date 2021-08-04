@@ -5,7 +5,7 @@ Create your own timeline graphs 'as-a-webpage', with Timelinor!
 
 You can find it [here](https://timelinor.herokuapp.com/) (registration is free)!
 
-![Screenshot](/frontend/static/img/showcase-1.png)
+![Screenshot](/frontend/static/img/showcase-readme-md.png)
 
 ### Description
 
