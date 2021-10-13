@@ -1,5 +1,5 @@
 asgiref==3.4.1 # ASGI specs, helper code, and adapters
-boto3==1.18.37 # Amazon's public API client
+boto3==1.18.60 # Amazon's public API client
 Django==3.2.7 # https://docs.djangoproject.com/
 django-environ==0.6.0 # Access local OS environment variables
 django-crispy-forms==1.12.0 # Better looking Bootstrap-enabled forms
@@ -7,7 +7,7 @@ django-extensions==3.1.3 # Django CLI tools
 django-storages==1.11.1 # Manage boto3 storage backend
 Pillow==8.3.2 # Image processing
 pytz==2021.1 # Python timezone library
-sqlparse==0.4.1
+sqlparse==0.4.2
 
 # Needed for Heroku deployments
 whitenoise # Static file serving for WSGI applications
