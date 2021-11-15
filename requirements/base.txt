@@ -1,5 +1,5 @@
 asgiref==3.4.1 # ASGI specs, helper code, and adapters
-boto3==1.18.60 # Amazon's public API client
+boto3==1.20.5 # Amazon's public API client
 Django==3.2.8 # https://docs.djangoproject.com/
 django-environ==0.7.0 # Access local OS environment variables
 django-crispy-forms==1.13.0 # Better looking Bootstrap-enabled forms
